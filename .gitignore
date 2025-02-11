@@ -398,4 +398,4 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
-/fjernfyn/jsconfig1.json
+/fjernfyn/appsettings.json
