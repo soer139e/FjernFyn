@@ -21,8 +21,6 @@
 
   <ItemGroup>
     <Resource Include="bgicon.png" />
-    <Resource Include="heart.png" />
-    <Resource Include="shise.png" />
   </ItemGroup>
 
 </Project>
