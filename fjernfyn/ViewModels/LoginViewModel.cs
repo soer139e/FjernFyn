@@ -12,15 +12,13 @@ namespace fjernfyn
         
         public ICommand loginCommand { get; }
 
+
+
         public LoginViewModel() 
         {
             loginCommand = new CommandHandler(OnLoginClicked);
             
-            IConfigurationRoot config = new ConfigurationBuilder()
-                .AddJsonFile("appsettings.json")
-                .Build();
-
-            con = config.GetConnectionString("DB_KEY");
+         
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
