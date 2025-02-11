@@ -13,5 +13,13 @@ namespace fjernfyn.Repositories
 
             con = config.GetConnectionString("DB_KEY");
         }
+
+        public bool HandleInformation(string userName, string passWord)
+        {
+            bool success = false; // false by default
+            //TODO: implement handling of information where we specifically communicate with the database
+
+            return success;
+        }
     }
 }
