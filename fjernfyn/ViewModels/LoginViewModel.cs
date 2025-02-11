@@ -64,7 +64,6 @@ namespace fjernfyn
         {
             var value = this.GetType().GetProperty(propertyName)?.GetValue(this, null);
 
-            Debug.WriteLine($"Property: {propertyName}, Value: {value}");
 
 
             PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
