@@ -1,13 +1,14 @@
 ﻿using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using System.Data;
+using System.Diagnostics;
 
 namespace fjernfyn.Repositories
 {
     internal class EmployeeRepository
     {
         private readonly string conString;
-        public EmployeeRepository() 
+        public EmployeeRepository()
         {
             IConfigurationRoot config = new ConfigurationBuilder()
              .AddJsonFile("appsettings.json")
@@ -24,10 +25,23 @@ namespace fjernfyn.Repositories
             {
                 con.Open();
 
-            }
-                //TODO: implement handling of information where we specifically communicate with the database
+                using (SqlCommand cmd = new SqlCommand("SELECT userName FROM Employees WHERE userName = @userName", con))
+                {
+                    cmd.Parameters.Add("@userName", SqlDbType.NVarChar).Value = userName;
 
-                return infoString;
+                    object result = cmd.ExecuteScalar();
+
+                    if (result != null)
+                    {
+                        Debug.WriteLine($"Employee found: {result.ToString()}");
+                    }
+                }
+
+            }
+
+            //TODO: implement handling of information where we specifically communicate with the database
+
+            return infoString;
         }
     }
 }
