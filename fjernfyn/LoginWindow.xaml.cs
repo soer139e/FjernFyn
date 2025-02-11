@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 
 namespace fjernfyn
 {
@@ -13,5 +14,16 @@ namespace fjernfyn
             InitializeComponent();
             DataContext = viewModel;
         }
+
+        private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            var passwordBox = sender as PasswordBox;
+            if (passwordBox != null)
+            {
+                var viewModel = (LoginViewModel)this.DataContext;
+                viewModel.Password = passwordBox.Password;
+            }
+        }
+
     }
 }
