@@ -11,8 +11,6 @@
 
   <ItemGroup>
     <None Remove="bgicon.png" />
-    <None Remove="heart.png" />
-    <None Remove="shise.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -21,10 +19,6 @@
 
   <ItemGroup>
     <Resource Include="bgicon.png" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="ViewModels\" />
   </ItemGroup>
 
 </Project>
