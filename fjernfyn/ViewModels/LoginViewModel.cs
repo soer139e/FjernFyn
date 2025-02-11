@@ -1,8 +1,10 @@
-﻿using System.Windows.Input;
+﻿using System.ComponentModel;
+using System.Diagnostics;
+using System.Windows.Input;
 
 namespace fjernfyn
 {
-    public class LoginViewModel
+    public class LoginViewModel : INotifyPropertyChanged
     {
         public ICommand loginCommand { get; }
 
@@ -11,7 +13,31 @@ namespace fjernfyn
             loginCommand = new CommandHandler(OnLoginClicked);
         }
 
-        private void OnLoginClicked() { }
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        private void OnLoginClicked() 
+        {
+            
+        }
+
+        protected void OnPropertyChanged(string propertyName)
+
+        {
+            var value = this.GetType().GetProperty(propertyName)?.GetValue(this, null);
+
+            Debug.WriteLine($"Property: {propertyName}, Value: {value}");
+
+
+            PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+
+            if (propertyChanged != null)
+
+            {
+                propertyChanged(this, new PropertyChangedEventArgs(propertyName));
+
+            }
+
+        }
 
 
     }
