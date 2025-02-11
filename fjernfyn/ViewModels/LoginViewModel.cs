@@ -1,4 +1,6 @@
-﻿using System.ComponentModel;
+﻿using Microsoft.Extensions.Configuration;
+using System.ComponentModel;
+using System.Data;
 using System.Diagnostics;
 using System.Windows.Input;
 
@@ -6,11 +8,19 @@ namespace fjernfyn
 {
     public class LoginViewModel : INotifyPropertyChanged
     {
+        private readonly string con;
+        
         public ICommand loginCommand { get; }
 
         public LoginViewModel() 
         {
             loginCommand = new CommandHandler(OnLoginClicked);
+            
+            IConfigurationRoot config = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json")
+                .Build();
+
+            con = config.GetConnectionString("DB_KEY");
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
