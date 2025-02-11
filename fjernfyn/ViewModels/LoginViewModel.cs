@@ -45,12 +45,14 @@ namespace fjernfyn
             // Should it do anything if it returns true/false or should we EXCLUSIVELY handle it in the repository.
         }
 
-        private Employee sendInformation()
+        private object sendInformation()
         {
             Debug.WriteLine($"From SendInformation: {UserName}, {Password}");
 
 
             string userInfo = empRepo.HandleInformation(UserName, Password);
+
+
 
             Employee finalEmp = null;
 
