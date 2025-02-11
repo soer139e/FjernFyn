@@ -40,9 +40,19 @@ namespace fjernfyn
 
         private void OnLoginClicked() 
         {
-            empRepo.HandleInformation(UserName, Password);
-
+            sendInformation();
             // Should it do anything if it returns true/false or should we EXCLUSIVELY handle it in the repository.
+        }
+
+        private Employee sendInformation()
+        {
+            string userInfo = empRepo.HandleInformation(UserName, Password);
+
+            Employee finalEmp = null;
+
+            return finalEmp;
+
+
         }
 
         protected void OnPropertyChanged(string propertyName)
