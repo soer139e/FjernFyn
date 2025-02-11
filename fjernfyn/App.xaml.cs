@@ -2,7 +2,7 @@
 using System.Data;
 using System.Windows;
 
-namespace fjernfynDesigns
+namespace fjernfyn
 {
     /// <summary>
     /// Interaction logic for App.xaml
