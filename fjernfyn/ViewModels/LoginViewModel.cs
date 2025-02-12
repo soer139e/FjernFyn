@@ -19,11 +19,22 @@ namespace fjernfyn
 
         private string _password;
 
+        private Employee _selectedEmp;
+
+
+        public Employee SelectedEmp
+        {
+            get { return _selectedEmp; }
+            set { _selectedEmp = value; OnPropertyChanged(nameof(SelectedEmp)); }
+        }
+
         public string UserName
         {
             get { return _userName; }
             set { _userName = value; OnPropertyChanged(nameof(UserName)); }
         }
+
+
 
 
         public string Password
@@ -58,7 +69,8 @@ namespace fjernfyn
 
             if (splitString.Length > 1)
             {
-                MessageBox.Show("yeah, we logged in... 😏😏😏", "success");
+                finalEmp = new Employee(splitString[0], splitString[1], splitString[2], (Department)Enum.Parse(typeof(Department), splitString[3]));
+                MessageBox.Show($"Velkommen: {splitString[4]} ({splitString[2]})\n\n\nHusk at være grundig i din feedback.", "Logget ind");
             } else
             {
                 MessageBox.Show(userInfo, "Fejl");
