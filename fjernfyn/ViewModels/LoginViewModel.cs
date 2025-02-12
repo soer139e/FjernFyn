@@ -41,15 +41,11 @@ namespace fjernfyn
 
         private void OnLoginClicked() 
         {
-            Debug.WriteLine($"From OnLoginClicked: {UserName}, {Password}");
             sendInformation();
         }
 
         private Employee sendInformation()
         {
-            Debug.WriteLine($"From SendInformation: {UserName}, {Password}");
-
-
             string userInfo = empRepo.HandleInformation(UserName, Password);
             string[] splitString = userInfo.Split("|");
             Employee finalEmp = null;
