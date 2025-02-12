@@ -1,6 +1,7 @@
 ﻿using fjernfyn.Repositories;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Windows;
 using System.Windows.Input;
 
 namespace fjernfyn
@@ -42,23 +43,25 @@ namespace fjernfyn
         {
             Debug.WriteLine($"From OnLoginClicked: {UserName}, {Password}");
             sendInformation();
-            // Should it do anything if it returns true/false or should we EXCLUSIVELY handle it in the repository.
         }
 
-        private object sendInformation()
+        private Employee sendInformation()
         {
             Debug.WriteLine($"From SendInformation: {UserName}, {Password}");
 
 
             string userInfo = empRepo.HandleInformation(UserName, Password);
-
-
-
+            string[] splitString = userInfo.Split("|");
             Employee finalEmp = null;
 
+            if (splitString.Length > 1)
+            {
+                MessageBox.Show("yeah, we logged in... 😏😏😏", "success");
+            } else
+            {
+                MessageBox.Show(userInfo, "Fejl");
+            }
             return finalEmp;
-
-
         }
 
         protected void OnPropertyChanged(string propertyName)
