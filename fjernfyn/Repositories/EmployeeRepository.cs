@@ -76,14 +76,11 @@ namespace fjernfyn.Repositories
                     }
                     else
                     {
-                        Debug.WriteLine("fuc you");
+                        infoString = $"Brugernavn eller kodeord er forkert.";
                     }
                 }
 
             }
-
-            //TODO: implement handling of information where we specifically communicate with the database
-
             return infoString;
         }
     }
