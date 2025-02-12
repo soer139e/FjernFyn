@@ -58,6 +58,7 @@ namespace fjernfyn
 
             if (splitString.Length > 1)
             {
+                finalEmp = new Employee(splitString[0], splitString[1], splitString[2], (Department)Enum.Parse(typeof(Department), splitString[3]));
                 MessageBox.Show("yeah, we logged in... 😏😏😏", "success");
             } else
             {
