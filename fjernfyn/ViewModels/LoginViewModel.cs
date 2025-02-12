@@ -21,7 +21,6 @@ namespace fjernfyn
 
         private Employee _selectedEmp;
 
-
         public Employee SelectedEmp
         {
             get { return _selectedEmp; }
@@ -33,9 +32,6 @@ namespace fjernfyn
             get { return _userName; }
             set { _userName = value; OnPropertyChanged(nameof(UserName)); }
         }
-
-
-
 
         public string Password
         {
@@ -79,23 +75,13 @@ namespace fjernfyn
         }
 
         protected void OnPropertyChanged(string propertyName)
-
         {
             var value = this.GetType().GetProperty(propertyName)?.GetValue(this, null);
-
-
-
             PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-
             if (propertyChanged != null)
-
             {
                 propertyChanged(this, new PropertyChangedEventArgs(propertyName));
-
             }
-
         }
-
-
     }
 }
