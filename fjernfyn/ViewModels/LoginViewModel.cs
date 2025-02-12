@@ -39,7 +39,13 @@ namespace fjernfyn
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        private void OnLoginClicked() 
+
+        /// <summary>
+        /// For some weird reason, changing the return type of this bound command to employee, results in everything going wrong.
+        /// So we need to have this OnLoginClicked method, which then instantly calls the SendInformation method.
+        /// Since binding to a command with a return type isnt allowed since its of an Action datatype... thank you microsoft.
+        /// </summary>
+        private void OnLoginClicked()  
         {
             sendInformation();
         }
