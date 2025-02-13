@@ -25,5 +25,11 @@ namespace fjernfyn
             }
         }
 
+        private void btnLogin_Click(object sender, RoutedEventArgs e)
+        {
+            FeedbackCreationWindow newWindow = new FeedbackCreationWindow();
+            this.Visibility = Visibility.Hidden;
+            newWindow.Show();
+        }
     }
 }
