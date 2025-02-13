@@ -7,46 +7,83 @@ namespace fjernfyn
 {
     public class LoginViewModel : INotifyPropertyChanged
     {
-        private readonly EmployeeRepository _employeeRepository;
+        private readonly string con;
 
-        public LoginViewModel()
+        private EmployeeRepository empRepo = new EmployeeRepository();
+
+        private GlobalValues glob = new GlobalValues();
+        public ICommand loginCommand { get; }
+
+        private string _userName;
+
+        private string _password;
+
+        private Employee _selectedEmp;
+
+        public Employee SelectedEmp
         {
-            _employeeRepository = new EmployeeRepository();
+            get { return _selectedEmp; }
+            set { _selectedEmp = value; OnPropertyChanged(nameof(SelectedEmp)); }
         }
 
-        public ICommand LoginCommand => new CommandHandler(OnLoginClicked);
-
-        public string UserName { get; set; }
-        public string Password { get; set; }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void OnLoginClicked()
+        public string UserName
         {
-            var employee = Login();
-
-            if (employee != null)
-            {
-                MessageBox.Show($"Velkommen: {employee.Username} ({employee.Email})\n\n\nHusk at være grundig i din feedback.", "Logget ind");
-            }
-            else
-            {
-                MessageBox.Show("Der skete en fejl under login (6x624)", "Fejl");
-            }
+            get { return _userName; }
+            set { _userName = value; OnPropertyChanged(nameof(UserName)); }
         }
 
-        public Employee Login()
+        public string Password
         {
-            string userInfo = _employeeRepository.HandleInformation(UserName, Password);
+            get { return _password; }
+            set { _password = value; OnPropertyChanged(nameof(Password)); }
+        }
+
+        public LoginViewModel() 
+        {
+            loginCommand = new CommandHandler(OnLoginClicked);
+        }
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+
+        /// <summary>
+        /// For some weird reason, changing the return type of this bound command to employee, results in everything going wrong.
+        /// So we need to have this OnLoginClicked method, which then instantly calls the SendInformation method.
+        /// Since binding to a command with a return type isnt allowed since its of an Action datatype... thank you microsoft.
+        /// </summary>
+        private void OnLoginClicked()  
+        {
+            sendInformation();
+        }
+
+        private Employee sendInformation()
+        {
+            string userInfo = empRepo.HandleInformation(UserName, Password);
             string[] splitString = userInfo.Split("|");
+            Employee finalEmp = null;
 
             if (splitString.Length > 1)
             {
-                Employee employee = new Employee(splitString[0], splitString[1], splitString[2], (Department)Enum.Parse(typeof(Department), splitString[3]));
-                return employee;
+                finalEmp = new Employee(splitString[0], splitString[1], splitString[2], (Department)Enum.Parse(typeof(Department), splitString[3]));
+                MessageBox.Show($"Velkommen: {splitString[4]} ({splitString[2]})\n\n\nHusk at være grundig i din feedback.", "Logget ind");
+                glob.CurrentEmployee = new Employee(finalEmp.Username, finalEmp.Password, finalEmp.Email, finalEmp.Department);
+
+
+            } else
+            {
+                MessageBox.Show(userInfo, "Fejl");
             }
-            return null;
+            return finalEmp;
+        }
+
+        protected void OnPropertyChanged(string propertyName)
+        {
+            var value = this.GetType().GetProperty(propertyName)?.GetValue(this, null);
+            PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if (propertyChanged != null)
+            {
+                propertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
         }
     }
-
 }
