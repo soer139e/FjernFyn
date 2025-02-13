@@ -4,17 +4,12 @@ using System.Windows.Data;
 
 namespace fjernfyn
 {
-    public class EmptyStringToVisibilityConverter : IValueConverter
+    public class GlobalValues
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return string.IsNullOrEmpty(value?.ToString()) ? Visibility.Visible : Visibility.Collapsed;
-        }
+        private static Employee _currentEmployee;
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return null;
-        }
+        public Employee CurrentEmployee { get { return _currentEmployee; } set { _currentEmployee = value; }  }
+
     }
 
 }
