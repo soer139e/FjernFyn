@@ -53,11 +53,11 @@
 
 
         <!--this feels gross but wpf doesnt support newlines... thanks microsoft.-->
-        <Label x:Name="lblUserFullName" Grid.Column="0" Grid.Row="3" Content="{Binding EmployeeName}" VerticalAlignment="Top" FontSize="15" FontFamily="Leelawadee UI"/>
+        <Label x:Name="lblUserFullName" Grid.Column="0" Grid.Row="3" Content="Peter Hansen" VerticalAlignment="Top" FontSize="15" FontFamily="Leelawadee UI"/>
 
-        <Label x:Name="lblUserEmail" Grid.Column="0" Grid.Row="3" Content="{Binding Email}" VerticalAlignment="Top" Margin="0,30,0,0" FontSize="15" FontFamily="Leelawadee UI"/>
+        <Label x:Name="lblUserEmail" Grid.Column="0" Grid.Row="3" Content="pete8765@fjernvarmefyn.dk" VerticalAlignment="Top" Margin="0,30,0,0" FontSize="15" FontFamily="Leelawadee UI"/>
 
-        <Label x:Name="lblUserDepartment" Grid.Column="0" Grid.Row="3" Content="{Binding Department}" VerticalAlignment="Top" Margin="0,60,0,0" FontSize="15" FontFamily="Leelawadee UI"/>
+        <Label x:Name="lblUserDepartment" Grid.Column="0" Grid.Row="3" Content="IT-Afdeling" VerticalAlignment="Top" Margin="0,60,0,0" FontSize="15" FontFamily="Leelawadee UI"/>
 
         <!--todo: indsæt placeholder bruger information-->
 
