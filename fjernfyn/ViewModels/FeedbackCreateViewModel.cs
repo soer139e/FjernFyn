@@ -4,6 +4,8 @@ namespace fjernfyn
 {
     public class FeedbackCreateViewModel : INotifyPropertyChanged
     {
+        private GlobalValues _values;
+
 
         private string _employeeName;
 
@@ -37,7 +39,13 @@ namespace fjernfyn
         /// <summary>
         /// TOOD: Implement INotifyPropertyChanged whenever we get to that.
         /// </summary>
-        public FeedbackCreateViewModel() { }
+        public FeedbackCreateViewModel() 
+        {
+            _values = new GlobalValues();
+            EmployeeName = _values.CurrentEmployee.Username;
+            Email = _values.CurrentEmployee.Email;
+            Department = $"{_values.CurrentEmployee.Department.ToString()}-Afdeling";
+        }
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
