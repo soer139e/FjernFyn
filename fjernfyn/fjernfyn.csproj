@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="icon.ico" />
+    <Content Include="Assets\icons\icon.ico" />
   </ItemGroup>
 
   <ItemGroup>
@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="bgicon.png" />
+    <Resource Include="Assets\icons\bgicon.png" />
   </ItemGroup>
 
   <ItemGroup>

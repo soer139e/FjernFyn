@@ -63,7 +63,7 @@ namespace fjernfyn.Repositories
                                         }
                                         else
                                         {
-                                            infoString = "Der skete en fejl under login (6x548)";
+                                            infoString = "Der skete en fejl under login\n\nFejlkode: (6x548)";
                                         }
                                     }
                                 }
