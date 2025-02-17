@@ -43,17 +43,15 @@ namespace fjernfyn
         public FeedbackCreateViewModel() 
         {
             _values = new GlobalValues();
-            try
+            if (_values.CurrentEmployee == null)
             {
-                EmployeeName = _values.CurrentEmployee.Username;
-                Email = _values.CurrentEmployee.Email;
-                Department = $"{_values.CurrentEmployee.Department.ToString()}-Afdeling";
-            } catch
-            {
-                MessageBox.Show("Fejl opstået ved forsøg på at logge ind. (9x347)", "Fejl");
+                MessageBox.Show("Der opstod en fejl under login (9x477)", "fejl");
             }
-            
-        }
+            //EmployeeName = _values.CurrentEmployee.Username;
+            //Email = _values.CurrentEmployee.Email;
+            //Department = $"{_values.CurrentEmployee.Department.ToString()}-Afdeling";
+        } 
+        
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
