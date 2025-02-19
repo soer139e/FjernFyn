@@ -1,8 +1,4 @@
-﻿using System.Globalization;
-using System.Windows;
-using System.Windows.Data;
-
-namespace fjernfyn
+﻿namespace fjernfyn
 {
     public class GlobalValues
     {

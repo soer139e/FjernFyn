@@ -5,7 +5,7 @@ namespace fjernfyn
 {
     public class FeedbackCreateViewModel : INotifyPropertyChanged
     {
-        private GlobalValues _values;
+      
 
 
         private string _employeeName;
@@ -38,18 +38,10 @@ namespace fjernfyn
 
 
         /// <summary>
-        /// TOOD: Implement INotifyPropertyChanged whenever we get to that.
+        /// TOOD: implement the employee class inside the constructor, call the employee so that we can fetch the information and databind it across views.
         /// </summary>
         public FeedbackCreateViewModel() 
         {
-            _values = new GlobalValues();
-            if (_values.CurrentEmployee == null)
-            {
-                MessageBox.Show("Der opstod en fejl under login (9x477)", "fejl");
-            }
-            //EmployeeName = _values.CurrentEmployee.Username;
-            //Email = _values.CurrentEmployee.Email;
-            //Department = $"{_values.CurrentEmployee.Department.ToString()}-Afdeling";
         } 
         
 

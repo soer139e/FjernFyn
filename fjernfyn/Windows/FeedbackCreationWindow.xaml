@@ -42,7 +42,10 @@
         <!--Binding UserName}-->
 
 
-        <TextBox Text="Skriv tekst her" Grid.Row="2" Grid.ColumnSpan="2" Margin="25,25,25,25" FontSize="20" FontFamily="Leelawadee UI"/>
+        <TextBox Text="Beskrivelse af problem" Grid.Row="2" Grid.ColumnSpan="2" Margin="25,25,25,100" FontSize="20" FontFamily="Leelawadee UI"/>
+        <TextBox Text="Hvad lavede du, da problemet opstod?" Grid.Row="2" Grid.ColumnSpan="2" Margin="25,100,25,25" FontSize="20" FontFamily="Leelawadee UI"/>
+
+
         <!--{Binding FeedbackContent}-->
 
         <Button x:Name="btnImg" Content="Vedhæft billede" FontSize="20" FontFamily="Leelawadee UI" Grid.Row="2" Grid.Column="3" Margin="50,25,50,0" VerticalAlignment="Top" Height="40"/>
@@ -53,11 +56,12 @@
 
 
         <!--this feels gross but wpf doesnt support newlines... thanks microsoft.-->
-        <Label x:Name="lblUserFullName" Grid.Column="0" Grid.Row="3" Content="{Binding EmployeeName}" VerticalAlignment="Top" FontSize="15" FontFamily="Leelawadee UI"/>
+        <!--{Binding EmployeeName},{Binding Email}, {Binding Department} -->
+        <Label x:Name="lblUserFullName" Grid.Column="0" Grid.Row="3" Content="Mikkel Pedersen" VerticalAlignment="Top" FontSize="15" FontFamily="Leelawadee UI"/>
 
-        <Label x:Name="lblUserEmail" Grid.Column="0" Grid.Row="3" Content="{Binding Email}" VerticalAlignment="Top" Margin="0,30,0,0" FontSize="15" FontFamily="Leelawadee UI"/>
+        <Label x:Name="lblUserEmail" Grid.Column="0" Grid.Row="3" Content="mikk1234@fjernvarmefyn.dk" VerticalAlignment="Top" Margin="0,30,0,0" FontSize="15" FontFamily="Leelawadee UI"/>
 
-        <Label x:Name="lblUserDepartment" Grid.Column="0" Grid.Row="3" Content="{Binding Department}" VerticalAlignment="Top" Margin="0,60,0,0" FontSize="15" FontFamily="Leelawadee UI"/>
+        <Label x:Name="lblUserDepartment" Grid.Column="0" Grid.Row="3" Content="Administration afdeling" VerticalAlignment="Top" Margin="0,60,0,0" FontSize="15" FontFamily="Leelawadee UI"/>
 
         <!--todo: indsæt placeholder bruger information-->
 

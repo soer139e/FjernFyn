@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="FFFeedback" Height="500" Width="800"
         DataContext="{Binding viewModel}">
-    
+
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="../Assets/icons/bgicon.png" Stretch="Uniform" Opacity="0.25"/>
@@ -23,7 +23,7 @@
         <Label Content="Brugernavn" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,20,0,0" FontSize="26" FontFamily="Leelawadee UI"/>
         <TextBox Text="{Binding UserName}" x:Name="tbUName" Grid.Row="1" Margin="100,60,100,10" Height="40" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="20" FontFamily="Leelawadee UI" />
 
-
+        <!--TOOD: Bind the information (username, password) to an instance of the employee class instead of the viewmodel.-->
 
         <Label Content="Kodeord" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,20,0,0" FontSize="26" FontFamily="Leelawadee UI"/>
         <PasswordBox x:Name="tbPass" Grid.Row="2" Margin="100,60,100,10" Height="40" 

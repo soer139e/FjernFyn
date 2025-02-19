@@ -10,7 +10,7 @@ namespace fjernfyn
     {
         FeedbackCreateViewModel viewModel = new FeedbackCreateViewModel();
 
-        public FeedbackCreationWindow()
+        public FeedbackCreationWindow(Employee emp)
         {
             InitializeComponent();
             DataContext = viewModel;
