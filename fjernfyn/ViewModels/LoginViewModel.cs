@@ -7,11 +7,10 @@ namespace fjernfyn
 {
     public class LoginViewModel : INotifyPropertyChanged
     {
-        private readonly string con;
 
-        private EmployeeRepository empRepo = new EmployeeRepository();
+        private readonly EmployeeRepository empRepo;
 
-        
+        //private GlobalValues glob = new GlobalValues();
         public ICommand loginCommand { get; }
 
         private string _userName;
@@ -38,9 +37,11 @@ namespace fjernfyn
             set { _password = value; OnPropertyChanged(nameof(Password)); }
         }
 
-        public LoginViewModel() 
+        public LoginViewModel()
         {
+            // TODO: Create an instance of employee class, instead of having username and password bindings here.
             loginCommand = new CommandHandler(OnLoginClicked);
+            empRepo = new EmployeeRepository();
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -51,13 +52,16 @@ namespace fjernfyn
         /// So we need to have this OnLoginClicked method, which then instantly calls the SendInformation method.
         /// Since binding to a command with a return type isnt allowed since its of an Action datatype... thank you microsoft.
         /// </summary>
-        private void OnLoginClicked()  
+        private void OnLoginClicked()
         {
             sendInformation();
         }
 
         private Employee sendInformation()
         {
+            /*TODO: this needs some form of way to run BEFORE the click event inside the view itself
+            * We need to do this, so that the new employee is created, and set, before we actually fetch the information.
+            */
             string userInfo = empRepo.HandleInformation(UserName, Password);
             string[] splitString = userInfo.Split("|");
             Employee finalEmp = null;
@@ -66,7 +70,8 @@ namespace fjernfyn
             {
                 finalEmp = new Employee(splitString[0], splitString[1], splitString[2], (Department)Enum.Parse(typeof(Department), splitString[3]));
                 MessageBox.Show($"Velkommen: {splitString[4]} ({splitString[2]})\n\n\nHusk at være grundig i din feedback.", "Logget ind");
-            } else
+            }
+            else
             {
                 MessageBox.Show(userInfo, "Fejl");
             }

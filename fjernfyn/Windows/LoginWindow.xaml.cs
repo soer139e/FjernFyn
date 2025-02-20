@@ -20,10 +20,20 @@ namespace fjernfyn
             var passwordBox = sender as PasswordBox;
             if (passwordBox != null)
             {
-                var viewModel = (LoginViewModel)this.DataContext;
                 viewModel.Password = passwordBox.Password;
             }
         }
 
+
+        private void btnLogin_Click(object sender, RoutedEventArgs e)
+        {
+
+            /// <summary>
+            /// TODO: Implement a timing that waits for the global employee to be set, as right now we dont do anything.
+            /// </summary>
+            //FeedbackCreationWindow newWindow = new FeedbackCreationWindow();
+            this.Visibility = Visibility.Hidden;
+            //newWindow.Show(); 
+        }
     }
 }

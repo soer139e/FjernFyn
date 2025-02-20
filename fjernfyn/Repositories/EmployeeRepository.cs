@@ -17,6 +17,7 @@ namespace fjernfyn.Repositories
             conString = config.GetConnectionString("DB_KEY");
         }
 
+        // TODO: rewrite to find a singular row using a singular query, then run another one, to fetch the rest of the info.
         public string HandleInformation(string userName, string passWord)
         {
             string infoString = "";
