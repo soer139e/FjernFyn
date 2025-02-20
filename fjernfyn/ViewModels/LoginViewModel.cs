@@ -50,7 +50,7 @@ namespace fjernfyn
                 nextWindow = new FeedbackCreationWindow(Employee);
                 nextWindow.Show();
                 Window.Close();
-                //MessageBox.Show($"Velkommen: {splitString[4]} ({splitString[2]})\n\n\nHusk at være grundig i din feedback.", "Logget ind");
+                MessageBox.Show($"Velkommen: {Employee.FullName} ({Employee.Email})\n\n\nHusk at være grundig i din feedback.", "Logget ind");
             }
             else
             {
