@@ -88,56 +88,6 @@ namespace fjernfyn.Repositories
 
                         }
                     }
-
-                    //object result = cmd.ExecuteScalar();
-
-                    //if (result != null)
-                    //{
-                    //    Debug.WriteLine($"Employee found: {result.ToString()}");
-                    //    // NESTED USING DIRECTIVES LETS FUCKING GOOOOOOO!!!!
-
-                    //    using (SqlCommand cmdPass = new SqlCommand("SELECT passWord FROM Employees WHERE userName = @userName", con))
-                    //    {
-                    //        cmdPass.Parameters.Add("@userName", SqlDbType.NVarChar).Value = userName;
-
-                    //        object result2 = cmdPass.ExecuteScalar();
-                    //        Debug.WriteLine($"{result2.ToString()}");
-                    //        if (result2.ToString() == passWord)
-                    //        {
-                    //            Debug.WriteLine("Password is valid when matched with database");
-                    //            using (SqlCommand fetchAll = new SqlCommand("SELECT email, department, Name FROM Employees WHERE userName = @userName", con))
-                    //            {
-                    //                fetchAll.Parameters.Add("@userName", SqlDbType.NVarChar).Value = userName;
-
-                    //                using (SqlDataReader reader = fetchAll.ExecuteReader())
-                    //                {
-                    //                    if (reader.Read() && reader["email"].ToString() != "" && reader["department"].ToString() != "" && reader["Name"].ToString() != "") 
-                    //                    {
-                    //                        string email = reader["email"].ToString();
-                    //                        string department = reader["department"].ToString();
-                    //                        string name = reader["Name"].ToString();
-
-                    //                        Debug.WriteLine($"Email: {email}, Department: {department}, Name: {name}");
-                    //                        infoString = $"{userName}|{passWord}|{email}|{department}|{name}";
-
-                    //                    }
-                    //                    else
-                    //                    {
-                    //                        infoString = "Der skete en fejl under login\n\nFejlkode: (6x548)";
-                    //                    }
-                    //                }
-                    //            }
-                    //        } else
-                    //        {
-                    //            infoString = "Brugernavn eller kodeord er forkert.";
-                    //        }
-
-                    //    }
-                    //}
-                    //else
-                    //{
-                    //    infoString = $"Brugernavn eller kodeord er forkert.";
-                    //}
                 }
 
             }
