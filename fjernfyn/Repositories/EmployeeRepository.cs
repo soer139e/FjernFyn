@@ -84,8 +84,8 @@ namespace fjernfyn.Repositories
 
                             reader.Read();
                             emp.Email = reader.GetString(3);
-                            //emp.Department = reader.GetEnumerator(4); // TODO: parse the enum
-
+                            emp.Department = (Department)Enum.Parse(typeof(Department), reader.GetString(4));
+                            emp.FullName = reader.GetString(5);
                         }
                     }
                 }
