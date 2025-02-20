@@ -7,13 +7,14 @@ namespace fjernfyn
 {
     public class LoginViewModel : INotifyPropertyChanged
     {
-        public Employee Employee;
+        public Employee Employee { get; set; }
 
         private readonly EmployeeRepository empRepo;
 
         //private GlobalValues glob = new GlobalValues();
         public ICommand loginCommand { get; }
 
+        private FeedbackCreationWindow nextWindow; 
 
         private Employee _selectedEmp;
 
@@ -44,30 +45,20 @@ namespace fjernfyn
         /// </summary>
         private void OnLoginClicked()
         {
-            sendInformation();
-        }
-
-        private Employee sendInformation()
-        {
-            /*TODO: this needs some form of way to run BEFORE the click event inside the view itself
-            * We need to do this, so that the new employee is created, and set, before we actually fetch the information.
-            */
-            string userInfo = empRepo.HandleInformation(Employee);
-            string[] splitString = userInfo.Split("|");
-            Employee finalEmp = null;
-
-            if (splitString.Length > 1)
+            if (empRepo.HandleInformation(Employee))
             {
-                finalEmp = new Employee(splitString[0], splitString[1], splitString[2], (Department)Enum.Parse(typeof(Department), splitString[3]));
-                MessageBox.Show($"Velkommen: {splitString[4]} ({splitString[2]})\n\n\nHusk at være grundig i din feedback.", "Logget ind");
+                nextWindow = new FeedbackCreationWindow(Employee);
+                nextWindow.Show();
                 Window.Close();
+                //MessageBox.Show($"Velkommen: {splitString[4]} ({splitString[2]})\n\n\nHusk at være grundig i din feedback.", "Logget ind");
             }
             else
             {
-                MessageBox.Show(userInfo, "Fejl");
+                MessageBox.Show("Der skete en fejl under login.", "Fejl");
+
             }
-            return finalEmp;
         }
+
 
         protected void OnPropertyChanged(string propertyName)
         {
