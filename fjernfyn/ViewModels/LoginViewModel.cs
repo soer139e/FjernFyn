@@ -13,9 +13,6 @@ namespace fjernfyn
         //private GlobalValues glob = new GlobalValues();
         public ICommand loginCommand { get; }
 
-        private string _userName;
-
-        private string _password;
 
         private Employee _selectedEmp;
 
@@ -24,18 +21,6 @@ namespace fjernfyn
             get { return _selectedEmp; }
             set { _selectedEmp = value; OnPropertyChanged(nameof(SelectedEmp)); }
         }
-
-        //public string UserName
-        //{
-        //    get { return _userName; }
-        //    set { _userName = value; OnPropertyChanged(nameof(UserName)); }
-        //}
-
-        //public string Password
-        //{
-        //    get { return _password; }
-        //    set { _password = value; OnPropertyChanged(nameof(Password)); }
-        //}
 
         public LoginViewModel()
         {
