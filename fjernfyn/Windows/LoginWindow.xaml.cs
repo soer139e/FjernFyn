@@ -20,7 +20,7 @@ namespace fjernfyn
             var passwordBox = sender as PasswordBox;
             if (passwordBox != null)
             {
-                viewModel.Password = passwordBox.Password;
+                viewModel.Employee.Password = passwordBox.Password;
             }
         }
 

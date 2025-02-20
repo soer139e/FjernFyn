@@ -9,12 +9,17 @@
 
         //TODO: constructor chain, so that the user can only input the username and password, and get away with it.
 
-        public Employee(string username, string password, string mail, Department dep) 
+        //public Employee(string username, string password, string mail, Department dep) 
+        //{
+        //    Username = username;
+        //    Password = password;
+        //    Email = mail;
+        //    Department = dep;
+        //}
+
+        public Employee() 
         {
-            Username = username;
-            Password = password;
-            Email = mail;
-            Department = dep;
+
         }
 
     }

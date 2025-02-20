@@ -7,6 +7,7 @@ namespace fjernfyn
 {
     public class LoginViewModel : INotifyPropertyChanged
     {
+        public Employee Employee;
 
         private readonly EmployeeRepository empRepo;
 
@@ -24,6 +25,7 @@ namespace fjernfyn
 
         public LoginViewModel()
         {
+            Employee = new Employee();
             // TODO: Create an instance of employee class, instead of having username and password bindings here.
             loginCommand = new CommandHandler(OnLoginClicked);
             empRepo = new EmployeeRepository();
