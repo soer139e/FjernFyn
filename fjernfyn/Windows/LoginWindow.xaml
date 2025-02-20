@@ -21,7 +21,7 @@
         <Label Content="Log ind til din arbejdsbruger for at kunne sende feedback." Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="26" FontWeight="DemiBold" FontFamily="Leelawadee UI"/>
 
         <Label Content="Brugernavn" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,20,0,0" FontSize="26" FontFamily="Leelawadee UI"/>
-        <TextBox Text="{Binding UserName}" x:Name="tbUName" Grid.Row="1" Margin="100,60,100,10" Height="40" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="20" FontFamily="Leelawadee UI" />
+        <TextBox Text="{Binding Employee.Username}" x:Name="tbUName" Grid.Row="1" Margin="100,60,100,10" Height="40" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="20" FontFamily="Leelawadee UI" />
 
         <!--TOOD: Bind the information (username, password) to an instance of the employee class instead of the viewmodel.-->
 
@@ -30,6 +30,6 @@
              VerticalContentAlignment="Center" HorizontalContentAlignment="Center" 
              FontSize="20" PasswordChanged="PasswordBox_PasswordChanged"/>
 
-        <Button x:Name="btnLogin" Content="Log ind" FontFamily="Leelawadee UI" FontSize="20" Grid.Row="3" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="100" Height="40" Margin="0,0,10,10" Command="{Binding loginCommand}" Click="btnLogin_Click"/>
+        <Button x:Name="btnLogin" Content="Log ind" FontFamily="Leelawadee UI" FontSize="20" Grid.Row="3" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="100" Height="40" Margin="0,0,10,10" Command="{Binding loginCommand}"/>
     </Grid>
 </Window>

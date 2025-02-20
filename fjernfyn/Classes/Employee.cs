@@ -7,15 +7,9 @@
         public string Email {  get; set; }
         public Department Department { get; set; }
 
-        //TODO: constructor chain, so that the user can only input the username and password, and get away with it.
+        public string FullName {  get; set; }
 
-        public Employee(string username, string password, string mail, Department dep) 
-        {
-            Username = username;
-            Password = password;
-            Email = mail;
-            Department = dep;
-        }
+        //TODO: constructor chain, so that the user can only input the username and password, and get away with it.
 
     }
 }
