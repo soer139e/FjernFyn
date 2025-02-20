@@ -52,7 +52,7 @@ namespace fjernfyn
             /*TODO: this needs some form of way to run BEFORE the click event inside the view itself
             * We need to do this, so that the new employee is created, and set, before we actually fetch the information.
             */
-            string userInfo = empRepo.HandleInformation(UserName, Password);
+            string userInfo = empRepo.HandleInformation(Employee);
             string[] splitString = userInfo.Split("|");
             Employee finalEmp = null;
 
