@@ -8,10 +8,11 @@ namespace fjernfyn
     /// </summary>
     public partial class MainWindow : Window
     {
-        LoginViewModel viewModel = new LoginViewModel();
+        LoginViewModel viewModel;
         public MainWindow()
         {
             InitializeComponent();
+            viewModel = new LoginViewModel(this);
             DataContext = viewModel;
         }
 
@@ -32,7 +33,6 @@ namespace fjernfyn
             /// TODO: Implement a timing that waits for the global employee to be set, as right now we dont do anything.
             /// </summary>
             //FeedbackCreationWindow newWindow = new FeedbackCreationWindow();
-            this.Visibility = Visibility.Hidden;
             //newWindow.Show(); 
         }
     }

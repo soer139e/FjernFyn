@@ -23,8 +23,11 @@ namespace fjernfyn
             set { _selectedEmp = value; OnPropertyChanged(nameof(SelectedEmp)); }
         }
 
-        public LoginViewModel()
+        public MainWindow Window { get; set; }
+
+        public LoginViewModel(MainWindow window)
         {
+            Window = window;
             Employee = new Employee();
             // TODO: Create an instance of employee class, instead of having username and password bindings here.
             loginCommand = new CommandHandler(OnLoginClicked);
@@ -57,6 +60,7 @@ namespace fjernfyn
             {
                 finalEmp = new Employee(splitString[0], splitString[1], splitString[2], (Department)Enum.Parse(typeof(Department), splitString[3]));
                 MessageBox.Show($"Velkommen: {splitString[4]} ({splitString[2]})\n\n\nHusk at være grundig i din feedback.", "Logget ind");
+                Window.Close();
             }
             else
             {
