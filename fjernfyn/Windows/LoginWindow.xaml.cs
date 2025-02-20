@@ -8,10 +8,11 @@ namespace fjernfyn
     /// </summary>
     public partial class MainWindow : Window
     {
-        LoginViewModel viewModel = new LoginViewModel();
+        public LoginViewModel viewModel { get; set; }
         public MainWindow()
         {
             InitializeComponent();
+            viewModel = new LoginViewModel(this);
             DataContext = viewModel;
         }
 
@@ -20,10 +21,11 @@ namespace fjernfyn
             var passwordBox = sender as PasswordBox;
             if (passwordBox != null)
             {
-                var viewModel = (LoginViewModel)this.DataContext;
-                viewModel.Password = passwordBox.Password;
+                viewModel.Employee.Password = passwordBox.Password;
             }
         }
 
+
+      
     }
 }
