@@ -25,17 +25,17 @@ namespace fjernfyn
             set { _selectedEmp = value; OnPropertyChanged(nameof(SelectedEmp)); }
         }
 
-        public string UserName
-        {
-            get { return _userName; }
-            set { _userName = value; OnPropertyChanged(nameof(UserName)); }
-        }
+        //public string UserName
+        //{
+        //    get { return _userName; }
+        //    set { _userName = value; OnPropertyChanged(nameof(UserName)); }
+        //}
 
-        public string Password
-        {
-            get { return _password; }
-            set { _password = value; OnPropertyChanged(nameof(Password)); }
-        }
+        //public string Password
+        //{
+        //    get { return _password; }
+        //    set { _password = value; OnPropertyChanged(nameof(Password)); }
+        //}
 
         public LoginViewModel()
         {
