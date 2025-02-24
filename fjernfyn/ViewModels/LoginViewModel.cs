@@ -45,7 +45,7 @@ namespace fjernfyn
         {
             if (empRepo.HandleInformation(Employee))
             {
-                nextWindow = new FeedbackCreationWindow(Employee);
+                nextWindow = new FeedbackCreationWindow(this.Employee);
                 nextWindow.Show();
                 Window.Close();
                 MessageBox.Show($"Velkommen: {Employee.FullName} ({Employee.Email})\n\n\nHusk at være grundig i din feedback.", "Logget ind");
