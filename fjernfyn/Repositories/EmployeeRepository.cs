@@ -1,9 +1,5 @@
 ﻿using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
-using System.Data;
-using System.Diagnostics;
-using System.Security.Cryptography;
-using System.Text;
 
 namespace fjernfyn.Repositories
 {
