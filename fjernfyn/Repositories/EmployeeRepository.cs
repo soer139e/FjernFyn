@@ -3,16 +3,19 @@ using Microsoft.Extensions.Configuration;
 
 namespace fjernfyn.Repositories
 {
-    internal class EmployeeRepository
+    internal class EmployeeRepository : IDatabaseConnection
     {
-        private readonly string conString;
+
+        public string ConString { get; set; }
+
+
         public EmployeeRepository()
         {
             IConfigurationRoot config = new ConfigurationBuilder()
              .AddJsonFile("appsettings.json")
              .Build();
 
-            conString = config.GetConnectionString("DB_KEY");
+            ConString = config.GetConnectionString("DB_KEY");
         }
 
         public bool HandleInformation(Employee emp)
@@ -21,7 +24,7 @@ namespace fjernfyn.Repositories
 
             bool valid = false;
 
-            using (SqlConnection con = new SqlConnection(conString))
+            using (SqlConnection con = new SqlConnection(ConString))
             {
                 con.Open();
 
