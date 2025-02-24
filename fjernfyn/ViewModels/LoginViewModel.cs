@@ -11,7 +11,6 @@ namespace fjernfyn
 
         private readonly EmployeeRepository empRepo;
 
-        //private GlobalValues glob = new GlobalValues();
         public ICommand loginCommand { get; }
 
         private FeedbackCreationWindow nextWindow; 
@@ -30,7 +29,6 @@ namespace fjernfyn
         {
             Window = window;
             Employee = new Employee();
-            // TODO: Create an instance of employee class, instead of having username and password bindings here.
             loginCommand = new CommandHandler(OnLoginClicked);
             empRepo = new EmployeeRepository();
         }

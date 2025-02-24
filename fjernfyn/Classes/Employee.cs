@@ -9,7 +9,5 @@
 
         public string FullName {  get; set; }
 
-        //TODO: constructor chain, so that the user can only input the username and password, and get away with it.
-
     }
 }
