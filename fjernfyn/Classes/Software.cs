@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace fjernfyn.Classes
 {
-    public class System
+    public class Software
     {
+        public int ID {  get; set; }
         public string Name { get; set; }
-        public System(string name)
+        public Software(string name)
         {
             Name = name;
         }
