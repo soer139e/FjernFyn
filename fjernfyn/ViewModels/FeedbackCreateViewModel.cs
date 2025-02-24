@@ -1,49 +1,64 @@
-﻿using System.ComponentModel;
+﻿using fjernfyn.Classes;
+using System.ComponentModel;
 using System.Windows;
+using System.Windows.Input;
 
 namespace fjernfyn
 {
     public class FeedbackCreateViewModel : INotifyPropertyChanged
     {
-      
+        private Window feedbackWindow {  get; set; }
 
+        public Feedback Feedback { get; set; }
 
-        private string _employeeName;
+        public Employee Employee { get; set; }
+        
+        public ICommand sendCommand { get; }
 
-        public string EmployeeName
+        private string? _employeeName;
+
+        public string? EmployeeName
         {
             get { return _employeeName; }
             set { _employeeName = value; OnPropertyChanged(nameof(EmployeeName)); }
         }
 
-        private string _email;
+        private string? _email;
 
-        public string Email
+        public string? Email
         {
             get { return _email; }
             set { _email = value; OnPropertyChanged(nameof(Email));}
         }
 
-        private string _department;
+        private string? _department;
         
-        public string Department
+        public string? Department
         {
             get { return _department; }
             set { _department = value; OnPropertyChanged(nameof(Department));}
         }
 
-        private string _feedbackContent;
+        private string? _feedbackContent;
 
-        public string FeedbackContent;
+        public string? FeedbackContent;
 
 
         /// <summary>
         /// TOOD: implement the employee class inside the constructor, call the employee so that we can fetch the information and databind it across views.
         /// </summary>
-        public FeedbackCreateViewModel() 
+        public FeedbackCreateViewModel(Window window, Employee emp) 
         {
+            sendCommand = new CommandHandler(SendClicked);
+            Feedback = new Feedback();
+            feedbackWindow = window;
+            Employee = emp;
         } 
         
+        public void SendClicked()
+        {
+
+        }
 
         public event PropertyChangedEventHandler? PropertyChanged;
 

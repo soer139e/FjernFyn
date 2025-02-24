@@ -8,11 +8,14 @@ namespace fjernfyn
     /// </summary>
     public partial class FeedbackCreationWindow : Window
     {
-        FeedbackCreateViewModel viewModel = new FeedbackCreateViewModel();
+        public FeedbackCreateViewModel viewModel {  get; set; }
+        //private Employee Employee { get; set; }
 
         public FeedbackCreationWindow(Employee emp)
         {
             InitializeComponent();
+           // Employee = emp;
+            viewModel = new FeedbackCreateViewModel(this, emp);
             DataContext = viewModel;
         }
 

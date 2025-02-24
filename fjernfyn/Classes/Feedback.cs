@@ -5,8 +5,8 @@ namespace fjernfyn.Classes
     public class Feedback
     {
         public int Id { get; set; }
-        public string Title { get; set; }
-        public string Description { get; set; }
+        public string Title { get; set; } = "Titel";
+        public string Description { get; set; } = "Beskrivelse af problem";
         public DateTime CreationDate { get; set; }
         public string ErrorCode { get; set; }
         public Category Type { get; set; }
@@ -30,7 +30,7 @@ namespace fjernfyn.Classes
             Priority = Priority;
             Image = image;
 
-        }
+        //}
 
     }
 }
