@@ -1,17 +1,14 @@
-﻿using Azure.Messaging;
-using fjernfyn.Classes;
+﻿using fjernfyn.Classes;
 using fjernfyn.Repositories;
-using fjernfyn.Windows;
 using System.ComponentModel;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace fjernfyn
 {
     public class FeedbackCreateViewModel : INotifyPropertyChanged
     {
-        public List<Software> softwares {  get; set; }
+        public List<Software> software {  get; set; }
         private FeedbackRepo feedbackRepo {  get; set; }
         private SoftwaresRepo softwaresRepo { get; set; }
 
@@ -60,8 +57,12 @@ namespace fjernfyn
         public FeedbackCreateViewModel(Window window, Employee emp) 
         {
             softwaresRepo = new SoftwaresRepo();
-            softwares = softwaresRepo.GetAll();
+            software = new List<Software>();
 
+            foreach (var software in softwaresRepo.GetAll())
+            {
+                software.Add(software);
+            }
             sendCommand = new CommandHandler(SendClicked);
             //addSoftwareCommand = new CommandHandler(PlusClicked);
             //TODO: We need to either
@@ -80,7 +81,7 @@ namespace fjernfyn
         //{
         //    InputDialog dialog = new InputDialog();
         //    dialog.ShowDialog();
-        //    softwares.Add(dialog.InputText);
+        //    software.Add(dialog.InputText);
         //    dialog.Close();
         //}
         public void SendClicked()
