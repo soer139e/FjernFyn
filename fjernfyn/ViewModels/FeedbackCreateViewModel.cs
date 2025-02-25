@@ -11,8 +11,10 @@ namespace fjernfyn
 {
     public class FeedbackCreateViewModel : INotifyPropertyChanged
     {
-        public List<string> softwares {  get; set; }
+        public List<Software> softwares {  get; set; }
         private FeedbackRepo feedbackRepo {  get; set; }
+        private SoftwaresRepo softwaresRepo { get; set; }
+
 
         private Window feedbackWindow {  get; set; }
 
@@ -21,7 +23,7 @@ namespace fjernfyn
         public Employee Employee { get; set; }
         
         public ICommand sendCommand { get; }
-        public ICommand addSoftwareCommand { get; }
+        //public ICommand addSoftwareCommand { get; }
 
         private string? _employeeName;
 
@@ -57,10 +59,11 @@ namespace fjernfyn
         /// </summary>
         public FeedbackCreateViewModel(Window window, Employee emp) 
         {
-            softwares = new List<string>();
+            softwaresRepo = new SoftwaresRepo();
+            softwares = softwaresRepo.GetAll();
 
             sendCommand = new CommandHandler(SendClicked);
-            addSoftwareCommand = new CommandHandler(PlusClicked);
+            //addSoftwareCommand = new CommandHandler(PlusClicked);
             //TODO: We need to either
             // A. remove the explicit Feedback constructor
             // B. somehow gather alll the information already premade here...
@@ -73,13 +76,13 @@ namespace fjernfyn
             Employee = emp;
         } 
         
-        public void PlusClicked()
-        {
-            InputDialog dialog = new InputDialog();
-            dialog.ShowDialog();
-            softwares.Add(dialog.InputText);
-            dialog.Close();
-        }
+        //public void PlusClicked()
+        //{
+        //    InputDialog dialog = new InputDialog();
+        //    dialog.ShowDialog();
+        //    softwares.Add(dialog.InputText);
+        //    dialog.Close();
+        //}
         public void SendClicked()
         {
             //Create feedback method isnt done yet.
