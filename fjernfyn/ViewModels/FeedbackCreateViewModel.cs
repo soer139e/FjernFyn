@@ -50,11 +50,15 @@ namespace fjernfyn
         public FeedbackCreateViewModel(Window window, Employee emp) 
         {
             sendCommand = new CommandHandler(SendClicked);
+
             //TODO: We need to either
             // A. remove the explicit Feedback constructor
             // B. somehow gather alll the information already premade here...
-            // In my personal opinion, going with option A, not only gives us consistency throughout the code, but is also objectively the better option if we want to not go insane writing this mess.
+
+            // In my personal opinion, going with option A, not only gives us consistency throughout the code,
+            // but is also objectively the better option if we want to not go insane writing this mess.
             //Feedback = new Feedback();
+
             feedbackWindow = window;
             Employee = emp;
         } 
