@@ -1,18 +1,17 @@
-﻿using Azure.Messaging;
-using fjernfyn.Classes;
+﻿using fjernfyn.Classes;
 using fjernfyn.Repositories;
-using fjernfyn.Windows;
 using System.ComponentModel;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace fjernfyn
 {
     public class FeedbackCreateViewModel : INotifyPropertyChanged
     {
-        public List<string> softwares {  get; set; }
-        private FeedbackRepo feedbackRepo {  get; set; }
+        public List<string> software {  get; set; }
+        private FeedbackRepo feedbackRepo;
+        private SoftwaresRepo softwaresRepo { get; set; }
+
 
         private Window feedbackWindow {  get; set; }
 
@@ -21,7 +20,7 @@ namespace fjernfyn
         public Employee Employee { get; set; }
         
         public ICommand sendCommand { get; }
-        public ICommand addSoftwareCommand { get; }
+        //public ICommand addSoftwareCommand { get; }
 
         private string? _employeeName;
 
@@ -57,13 +56,22 @@ namespace fjernfyn
         /// </summary>
         public FeedbackCreateViewModel(Window window, Employee emp) 
         {
-            softwares = new List<string>();
+            feedbackRepo = new FeedbackRepo();
 
+            softwaresRepo = new SoftwaresRepo();
+            software = new List<string>();
+
+            foreach (var obj in softwaresRepo.GetAll())
+            {
+                //maybe we should change this name too
+                string[] cuck = obj.ToString().Split(";");
+                software.Add(cuck[1]);
+            }
             sendCommand = new CommandHandler(SendClicked);
-            addSoftwareCommand = new CommandHandler(PlusClicked);
+            //addSoftwareCommand = new CommandHandler(PlusClicked);
             //TODO: We need to either
             // A. remove the explicit Feedback constructor
-            // B. somehow gather alll the information already premade here...
+            // B. somehow gather all the information already premade here...
 
             // In my personal opinion, going with option A, not only gives us consistency throughout the code,
             // but is also objectively the better option if we want to not go insane writing this mess.
@@ -73,17 +81,31 @@ namespace fjernfyn
             Employee = emp;
         } 
         
-        public void PlusClicked()
-        {
-            InputDialog dialog = new InputDialog();
-            dialog.ShowDialog();
-            softwares.Add(dialog.InputText);
-            dialog.Close();
-        }
+        //public void PlusClicked()
+        //{
+        //    InputDialog dialog = new InputDialog();
+        //    dialog.ShowDialog();
+        //    software.Add(dialog.InputText);
+        //    dialog.Close();
+        //}
         public void SendClicked()
         {
             //Create feedback method isnt done yet.
+            //TODO: DATABIND A SELECTED SOFTWARE AND OTHER DROP BOXES
+            // Also.... maybe change the variable name
+            // THESE ARE DUMMY VALUES! I BEG YOU!!!!
+           
+            Software bitch = new Software();
+            bitch.Name = "Trello";
+            bitch.ID = 4;
+            Feedback.SoftwareProp = bitch;
+
+
+            Feedback.Employee = Employee;
+
             feedbackRepo.CreateFeedback(Feedback);
+            // TODO: change this fuckass message
+            MessageBox.Show("godt gået... god dreng 👏👏👏👏👏👏👏", "success");
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
