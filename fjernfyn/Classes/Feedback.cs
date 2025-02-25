@@ -30,7 +30,7 @@ namespace fjernfyn.Classes
             Priority = Priority;
             Image = image;
 
-        //}
+        }
 
     }
 }
