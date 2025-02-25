@@ -9,7 +9,7 @@ namespace fjernfyn
     public class FeedbackCreateViewModel : INotifyPropertyChanged
     {
         public List<string> software {  get; set; }
-        private FeedbackRepo feedbackRepo {  get; set; }
+        private FeedbackRepo feedbackRepo;
         private SoftwaresRepo softwaresRepo { get; set; }
 
 
@@ -56,6 +56,8 @@ namespace fjernfyn
         /// </summary>
         public FeedbackCreateViewModel(Window window, Employee emp) 
         {
+            feedbackRepo = new FeedbackRepo();
+
             softwaresRepo = new SoftwaresRepo();
             software = new List<string>();
 
@@ -68,7 +70,7 @@ namespace fjernfyn
             //addSoftwareCommand = new CommandHandler(PlusClicked);
             //TODO: We need to either
             // A. remove the explicit Feedback constructor
-            // B. somehow gather alll the information already premade here...
+            // B. somehow gather all the information already premade here...
 
             // In my personal opinion, going with option A, not only gives us consistency throughout the code,
             // but is also objectively the better option if we want to not go insane writing this mess.
@@ -88,7 +90,18 @@ namespace fjernfyn
         public void SendClicked()
         {
             //Create feedback method isnt done yet.
+            //TODO: DATABIND A SELECTED SOFTWARE AND OTHER DROP BOXES
+            // THESE ARE DUMMY VALUES! I BEG YOU!!!!
+            Software bitch = new Software();
+            bitch.Name = "Trello";
+            bitch.ID = 4;
+            Feedback.SoftwareProp = bitch;
+
+
+            Feedback.Employee = Employee;
+
             feedbackRepo.CreateFeedback(Feedback);
+            MessageBox.Show("godt gået... god dreng 👏👏👏👏👏👏👏", "success");
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
