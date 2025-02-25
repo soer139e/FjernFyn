@@ -8,7 +8,7 @@ namespace fjernfyn
 {
     public class FeedbackCreateViewModel : INotifyPropertyChanged
     {
-        public List<Software> software {  get; set; }
+        public List<string> software {  get; set; }
         private FeedbackRepo feedbackRepo {  get; set; }
         private SoftwaresRepo softwaresRepo { get; set; }
 
@@ -57,11 +57,12 @@ namespace fjernfyn
         public FeedbackCreateViewModel(Window window, Employee emp) 
         {
             softwaresRepo = new SoftwaresRepo();
-            software = new List<Software>();
+            software = new List<string>();
 
-            foreach (var software in softwaresRepo.GetAll())
+            foreach (var obj in softwaresRepo.GetAll())
             {
-                software.Add(software);
+                string[] cuck = obj.ToString().Split(";");
+                software.Add(cuck[1]);
             }
             sendCommand = new CommandHandler(SendClicked);
             //addSoftwareCommand = new CommandHandler(PlusClicked);
