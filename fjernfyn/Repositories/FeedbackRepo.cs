@@ -43,10 +43,43 @@ namespace fjernfyn.Repositories
             }
             
         }
-        public List<Feedback> GetFeedbacks() { 
+        public List<Feedback> GetAllFeedback() { 
            feedbacks.Clear();
-            
-           return feedbacks;
+            using (SqlConnection con = new SqlConnection(conString))
+            {
+                con.Open() ;
+                //Gets all feedbacks in database as well as the connected Employee and Software.
+                using (SqlCommand cmd = new SqlCommand("SELECT * FROM FEEDBACK JOIN EMPLOYEES ON (EmployeeID = ID) JOIN Software " +
+                    "ON (SoftwareID = Software.ID)", con))
+                {
+                    using (SqlDataReader dr = cmd.ExecuteReader()) {
+                        while (dr.Read())
+                        {
+                            Feedback feedback = new Feedback()
+                            {
+                                Id = dr.GetInt32(0),
+                                Priority=(Priority)Enum.Parse(typeof(Priority),dr.GetString(1)),
+                                Title = dr.GetString(2),
+                                Description=dr.GetString(3),
+                                Type = (Category)Enum.Parse(typeof(Priority),dr.GetString(6)),
+                                CreationDate = dr.GetString(7),
+                                ErrorCode = dr.GetString(8),
+                                Image = dr.GetString(9),
+                            };
+                            feedback.Employee.Username = dr.GetString(11);
+                            feedback.Employee.Email = dr.GetString(13);
+                            feedback.Employee.Department = (Department)Enum.Parse(typeof(Department),dr.GetString(14));
+                            feedback.Employee.FullName = dr.GetString(15);
+
+                            feedback.SoftwareProp.ID = dr.GetInt32(4);
+                            feedback.SoftwareProp.Name = dr.GetString(17);
+
+                            feedbacks.Add(feedback);
+                        }
+                    }
+                }
+            }
+                return feedbacks;
         }
 
     }

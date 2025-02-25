@@ -10,9 +10,9 @@ namespace fjernfyn.Classes
     {
         public int ID {  get; set; }
         public string Name { get; set; }
-        public Software(string name)
+        public Software()
         {
-            Name = name;
+            
         }
     }
 }
