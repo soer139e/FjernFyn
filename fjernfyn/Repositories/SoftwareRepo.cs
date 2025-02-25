@@ -37,9 +37,10 @@ namespace fjernfyn.Repositories
                     using (SqlDataReader dr = cmd.ExecuteReader()) {
                         if (dr.Read())
                         {
-                            result = new Software(dr.GetString(1))
+                            result = new Software()
                             {
-                                ID = dr.GetInt32(0)
+                                ID = dr.GetInt32(0),
+                                Name = dr.GetString(1)
                             };
 
                         }
@@ -63,9 +64,10 @@ namespace fjernfyn.Repositories
                     {
                         while (dr.Read())
                         {
-                            Software newSoftware = new Software(dr.GetString(1))
+                            Software newSoftware = new Software()
                             {
-                                ID = dr.GetInt32(0)
+                                ID = dr.GetInt32(0),
+                                Name = dr.GetString(1)
                             }; softwares.Add(newSoftware);
                         };
                     }
