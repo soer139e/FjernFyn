@@ -13,7 +13,8 @@ namespace fjernfyn.Repositories
     {
         private readonly string conString;
         private List<Feedback> feedbacks;
-        public FeedbackRepo() {
+        public FeedbackRepo()
+        {
             feedbacks = new List<Feedback>();
             IConfigurationRoot config = new ConfigurationBuilder().AddJsonFile("appsettings.json")
             .Build();
@@ -26,53 +27,64 @@ namespace fjernfyn.Repositories
             using (SqlConnection con = new SqlConnection(conString))
             {
                 con.Open();
-             
-                using (SqlCommand cmd = new SqlCommand("INSERT INTO Feedback (FeedbackID, Priority, Title, Description,Category," +
-                    "CreationDate,EmployeeID,SoftwareID" +
-                    "ErrorCode,Image)"
-                    + "Values(@Priority, @Title, @Description,@Category,@CreationDate,@EmployeeID,@SoftwareID,@ErrorCode,@Image)", con))
+
+                using (SqlCommand checkCmd = new SqlCommand("SELECT COUNT(1) FROM Employees WHERE id = @EmployeeID", con))
                 {
-                    cmd.Parameters.AddWithValue("@Criticality", feedback.Priority);
-                    cmd.Parameters.AddWithValue("@Title", feedback.Title);
-                    cmd.Parameters.AddWithValue("@Description",feedback.Description);
-                    cmd.Parameters.AddWithValue("@Category", feedback.Type);
-                    cmd.Parameters.AddWithValue("@CreationDate",feedback.CreationDate);
-                    cmd.Parameters.AddWithValue("@EmployeeID", feedback.Employee.Id);
-                    cmd.Parameters.AddWithValue("@SoftwareID", feedback.SoftwareProp.ID);
-                    cmd.Parameters.AddWithValue("@ErrorCode", feedback.ErrorCode);
-                    cmd.Parameters.AddWithValue("@Image", feedback.Image);
-                    cmd.ExecuteNonQuery();
+                    checkCmd.Parameters.AddWithValue("@EmployeeID", feedback.Employee.Id);
+                    int count = (int)checkCmd.ExecuteScalar();
+                    if (count == 0)
+                    {
+                        throw new InvalidOperationException($"Employee with ID {feedback.Employee.Id} does not exist.");
+                    }
                 }
 
+                using (SqlCommand cmd = new SqlCommand("INSERT INTO Feedback (Priority, Title, Description, Category, CreationDate, EmployeeID, SoftwareID, ErrorCode, Image) " +
+            "VALUES (@Priority, @Title, @Description, @Category, @CreationDate, @EmployeeID, @SoftwareID, @ErrorCode, @Image)", con))
+                {
+                    cmd.Parameters.AddWithValue("@Priority", feedback.Priority);
+                    cmd.Parameters.AddWithValue("@Title", feedback.Title);
+                    cmd.Parameters.AddWithValue("@Description", feedback.Description);
+                    cmd.Parameters.AddWithValue("@Category", feedback.Type);
+                    cmd.Parameters.AddWithValue("@CreationDate", "2025-02-25"); // Use fixed dummy date as string
+                    cmd.Parameters.AddWithValue("@EmployeeID", feedback.Employee.Id);
+                    cmd.Parameters.AddWithValue("@SoftwareID", feedback.SoftwareProp.ID);
+                    cmd.Parameters.AddWithValue("@ErrorCode", "stupid");
+                    cmd.Parameters.AddWithValue("@Image", "not real");
+
+                    cmd.ExecuteNonQuery();
+                }
             }
-            
         }
-        public List<Feedback> GetAllFeedback() { 
-           feedbacks.Clear();
+
+
+        public List<Feedback> GetAllFeedback()
+        {
+            feedbacks.Clear();
             using (SqlConnection con = new SqlConnection(conString))
             {
-                con.Open() ;
+                con.Open();
                 //Gets all feedbacks in database as well as the connected Employee and Software.
                 using (SqlCommand cmd = new SqlCommand("SELECT * FROM FEEDBACK JOIN EMPLOYEES ON (EmployeeID = ID) JOIN Software " +
                     "ON (SoftwareID = Software.ID)", con))
                 {
-                    using (SqlDataReader dr = cmd.ExecuteReader()) {
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
                         while (dr.Read())
                         {
                             Feedback feedback = new Feedback()
                             {
                                 Id = dr.GetInt32(0),
-                                Priority=(Priority)Enum.Parse(typeof(Priority),dr.GetString(1)),
+                                Priority = (Priority)Enum.Parse(typeof(Priority), dr.GetString(1)),
                                 Title = dr.GetString(2),
-                                Description=dr.GetString(3),
-                                Type = (Category)Enum.Parse(typeof(Priority),dr.GetString(6)),
+                                Description = dr.GetString(3),
+                                Type = (Category)Enum.Parse(typeof(Priority), dr.GetString(6)),
                                 CreationDate = dr.GetString(7),
                                 ErrorCode = dr.GetString(8),
                                 Image = dr.GetString(9),
                             };
                             feedback.Employee.Username = dr.GetString(11);
                             feedback.Employee.Email = dr.GetString(13);
-                            feedback.Employee.Department = (Department)Enum.Parse(typeof(Department),dr.GetString(14));
+                            feedback.Employee.Department = (Department)Enum.Parse(typeof(Department), dr.GetString(14));
                             feedback.Employee.FullName = dr.GetString(15);
 
                             feedback.SoftwareProp.ID = dr.GetInt32(4);
@@ -83,7 +95,7 @@ namespace fjernfyn.Repositories
                     }
                 }
             }
-                return feedbacks;
+            return feedbacks;
         }
 
     }
