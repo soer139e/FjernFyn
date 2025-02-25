@@ -45,9 +45,11 @@ namespace fjernfyn.Repositories
                     cmd.Parameters.AddWithValue("@Title", feedback.Title);
                     cmd.Parameters.AddWithValue("@Description", feedback.Description);
                     cmd.Parameters.AddWithValue("@Category", feedback.Type);
+                    //TODO: Databind the creation data, AKA MAKE EVERYTHING BE A DATETIME.
                     cmd.Parameters.AddWithValue("@CreationDate", "2025-02-25"); // Use fixed dummy date as string
                     cmd.Parameters.AddWithValue("@EmployeeID", feedback.Employee.Id);
                     cmd.Parameters.AddWithValue("@SoftwareID", feedback.SoftwareProp.ID);
+                    //TODO: also databind these two little fellas.
                     cmd.Parameters.AddWithValue("@ErrorCode", "stupid");
                     cmd.Parameters.AddWithValue("@Image", "not real");
 
