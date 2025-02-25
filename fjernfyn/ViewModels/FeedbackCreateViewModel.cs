@@ -9,6 +9,7 @@ namespace fjernfyn
     public class FeedbackCreateViewModel : INotifyPropertyChanged
     {
         private FeedbackRepo feedbackRepo {  get; set; }
+
         private Window feedbackWindow {  get; set; }
 
         public Feedback Feedback { get; set; }
@@ -59,7 +60,7 @@ namespace fjernfyn
 
             // In my personal opinion, going with option A, not only gives us consistency throughout the code,
             // but is also objectively the better option if we want to not go insane writing this mess.
-            //Feedback = new Feedback();
+            Feedback = new Feedback();
 
             feedbackWindow = window;
             Employee = emp;
