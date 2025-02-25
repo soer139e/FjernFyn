@@ -1,4 +1,5 @@
 ﻿using fjernfyn.Classes;
+using fjernfyn.Repositories;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
@@ -7,6 +8,7 @@ namespace fjernfyn
 {
     public class FeedbackCreateViewModel : INotifyPropertyChanged
     {
+        private FeedbackRepo feedbackRepo {  get; set; }
         private Window feedbackWindow {  get; set; }
 
         public Feedback Feedback { get; set; }
@@ -65,7 +67,8 @@ namespace fjernfyn
         
         public void SendClicked()
         {
-
+            //Create feedback method isnt done yet.
+            feedbackRepo.CreateFeedback(Feedback);
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
