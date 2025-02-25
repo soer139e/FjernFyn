@@ -52,5 +52,12 @@ namespace fjernfyn.Repositories
             }
             return valid;
         }
+
+        public Employee GetByID(int id) // Bliver brugt i Feedbackrepo for at finde den tilhørende Employee i databasen for et givet Feedback
+        {
+            Employee result = new Employee();
+
+            return result;
+        }
     }
 }
