@@ -1,7 +1,10 @@
-﻿using fjernfyn.Classes;
+﻿using Azure.Messaging;
+using fjernfyn.Classes;
 using fjernfyn.Repositories;
+using fjernfyn.Windows;
 using System.ComponentModel;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace fjernfyn
@@ -72,9 +75,10 @@ namespace fjernfyn
         
         public void PlusClicked()
         {
-            MessageBox.Show("Navn på system: ");
-            
-
+            InputDialog dialog = new InputDialog();
+            dialog.ShowDialog();
+            softwares.Add(dialog.InputText);
+            dialog.Close();
         }
         public void SendClicked()
         {
