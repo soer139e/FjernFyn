@@ -27,6 +27,16 @@
 
         <Label Content="System" FontSize="20" FontFamily="Leelawadee UI" HorizontalAlignment="Center" Margin="0,10,0,50"/>
         <ComboBox Grid.Row="0" Grid.Column="0"  Margin="50,50,50,10" />
+        <Button Content="+"
+                Grid.Row="0"
+                Grid.Column="0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Width="30" Height="30"
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"
+                Margin="50,50,10,10"
+                RenderTransformOrigin="0.504,0.545" />
         <!--System selection-->
 
         <Label Content="Prioritet" Grid.Column="1" FontSize="20" FontFamily="Leelawadee UI" HorizontalAlignment="Center" Margin="0,10,0,50"/>

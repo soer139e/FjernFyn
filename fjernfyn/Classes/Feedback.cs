@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System.CodeDom;
+using System.Windows.Controls;
 
 namespace fjernfyn.Classes
 {
@@ -18,6 +19,13 @@ namespace fjernfyn.Classes
 
         public Image Image { get; set; }
 
+        public Feedback()
+        {
+            Type = new Category();
+            Employee = new Employee();
+            //Software = new Software();
+            Priority = new Priority();
+        }
         //public Feedback(int id, string title, string description, DateTime creationDate, string errorCode, Category type, Employee employee, Software software, Image image)
         //{
         //    Id = id;
