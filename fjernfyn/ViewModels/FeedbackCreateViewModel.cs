@@ -63,6 +63,7 @@ namespace fjernfyn
 
             foreach (var obj in softwaresRepo.GetAll())
             {
+                //maybe we should change this name too
                 string[] cuck = obj.ToString().Split(";");
                 software.Add(cuck[1]);
             }
@@ -91,7 +92,9 @@ namespace fjernfyn
         {
             //Create feedback method isnt done yet.
             //TODO: DATABIND A SELECTED SOFTWARE AND OTHER DROP BOXES
+            // Also.... maybe change the variable name
             // THESE ARE DUMMY VALUES! I BEG YOU!!!!
+           
             Software bitch = new Software();
             bitch.Name = "Trello";
             bitch.ID = 4;
@@ -101,6 +104,7 @@ namespace fjernfyn
             Feedback.Employee = Employee;
 
             feedbackRepo.CreateFeedback(Feedback);
+            // TODO: change this fuckass message
             MessageBox.Show("godt gået... god dreng 👏👏👏👏👏👏👏", "success");
         }
 
