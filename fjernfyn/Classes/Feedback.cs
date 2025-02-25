@@ -17,15 +17,16 @@ namespace fjernfyn.Classes
         public Priority Priority { get; set; }
 
         public Image Image { get; set; }
-        public Feedback(int id, string title, string description, DateTime creationDate, string errorCode, Category type, Employee employee, Software software, Image image) { 
-        Id = id;
-            Title = title;  
+        public Feedback(int id, string title, string description, DateTime creationDate, string errorCode, Category type, Employee employee, Software software, Image image)
+        {
+            Id = id;
+            Title = title;
             Description = description;
             CreationDate = creationDate;
             ErrorCode = errorCode;
             Type = type;
             Employee = employee;
-          Software = software;
+            Software = software;
             Image = image;
             Priority = Priority;
             Image = image;
