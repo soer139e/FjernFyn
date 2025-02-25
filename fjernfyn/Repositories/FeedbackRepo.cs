@@ -26,17 +26,21 @@ namespace fjernfyn.Repositories
             using (SqlConnection con = new SqlConnection(conString))
             {
                 con.Open();
-                //
-                //
-                //Tilføj alle værdier når database er opdateres
-                //
-                //
-                using (SqlCommand cmd = new SqlCommand("INSERT INTO Feedback (FeedbackID, Priority, Title, Description)"
-                    + "Values(@Priority, @Title, @Description)", con))
+             
+                using (SqlCommand cmd = new SqlCommand("INSERT INTO Feedback (FeedbackID, Priority, Title, Description,Category," +
+                    "CreationDate,EmployeeID,SoftwareID" +
+                    "ErrorCode,Image)"
+                    + "Values(@Priority, @Title, @Description,@Category,@CreationDate,@EmployeeID,@SoftwareID,@ErrorCode,@Image)", con))
                 {
                     cmd.Parameters.AddWithValue("@Criticality", feedback.Priority);
                     cmd.Parameters.AddWithValue("@Title", feedback.Title);
                     cmd.Parameters.AddWithValue("@Description",feedback.Description);
+                    cmd.Parameters.AddWithValue("@Category", feedback.Type);
+                    cmd.Parameters.AddWithValue("@CreationDate",feedback.CreationDate);
+                    cmd.Parameters.AddWithValue("@EmployeeID", feedback.Employee.Id);
+                    cmd.Parameters.AddWithValue("@SoftwareID", feedback.SoftwareProp.ID);
+                    cmd.Parameters.AddWithValue("@ErrorCode", feedback.ErrorCode);
+                    cmd.Parameters.AddWithValue("@Image", feedback.Image);
                     cmd.ExecuteNonQuery();
                 }
 
