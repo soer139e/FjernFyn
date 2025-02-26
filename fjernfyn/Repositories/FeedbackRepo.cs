@@ -65,13 +65,17 @@ namespace fjernfyn.Repositories
                                 Priority=(Priority)Enum.Parse(typeof(Priority),dr.GetString(1)),
                                 Title = dr.GetString(2),
                                 Description=dr.GetString(3),
-                                Type = (Category)Enum.Parse(typeof(Priority),dr.GetString(6)),
-                                CreationDate = dr.GetString(7),
+
+                                //Midlertidlig udkommenteret fordi databasens rækker stemmer ikke overens med koden
+                               // Type = (Category)Enum.Parse(typeof(Priority),dr.GetString(6)),
+                               // CreationDate = dr.GetString(7),
                                 ErrorCode = dr.GetString(8),
                                 Image = dr.GetString(9),
                             };
                             feedback.Employee.Username = dr.GetString(11);
-                            feedback.Employee.Email = dr.GetString(13);
+                            if(!dr.IsDBNull(11))
+                                 feedback.Employee.Username = dr.GetString(11);
+
                             feedback.Employee.Department = (Department)Enum.Parse(typeof(Department),dr.GetString(14));
                             feedback.Employee.FullName = dr.GetString(15);
 

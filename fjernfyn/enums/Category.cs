@@ -2,5 +2,8 @@
 {
     public enum Category
     {
+        Request,
+        Feature,
+        Bug
     }
 }

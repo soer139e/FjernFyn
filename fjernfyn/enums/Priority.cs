@@ -8,5 +8,11 @@ namespace fjernfyn
 {
     public enum Priority
     {
+        High,
+        Medium,
+        Low,
+        // Midlertidlig tilføjet
+        Critical
     }
 }
+

@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using fjernfyn.ViewModels;
+using System.Windows.Controls;
 
 namespace fjernfyn.Classes
 {
@@ -21,6 +22,14 @@ namespace fjernfyn.Classes
         public Feedback()
         {
             SoftwareProp = new Software();
+            Employee = new Employee();
+        }
+
+        // Bruges til at vise feedback opdelt ordentligt i InquiryOverview
+        // NOT FINISHED
+        public override string ToString()
+        {
+            return $"{Title}, ";
         }
     }
 }
