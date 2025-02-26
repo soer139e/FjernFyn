@@ -21,22 +21,22 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <!--<ListBox d:ItemsSource="{d:SampleData ItemCount=5}" Margin="98,76,87,60" Grid.RowSpan="4" Grid.ColumnSpan="3" FontSize="20"/>-->
-        <ListView d:ItemsSource="{Binding Feedbacks}" Grid.RowSpan="4" Grid.ColumnSpan="3">
+        <ListView d:ItemsSource="{Binding Feedbacks}" Grid.Column="0" Grid.Row="1" Grid.RowSpan="2" Grid.ColumnSpan="3"> 
             <ListView.Resources>
-
+                
             </ListView.Resources>
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header ="Title" 
-                                      DisplayMemberBinding="{Binding Title}"/>
+                                      DisplayMemberBinding="{Binding Path=Title}" Width="100"/>
                     <GridViewColumn Header="System" 
-                                    DisplayMemberBinding="{Binding System}"/>
+                                    DisplayMemberBinding="{Binding Path=SoftwareProp}" Width="100"/>
                     <GridViewColumn Header ="Priority" 
-                                      DisplayMemberBinding="{Binding Priority}"/>
+                                      DisplayMemberBinding="{Binding Path=Priority}" Width="100"/>
                     <GridViewColumn Header ="Type" 
-                                      DisplayMemberBinding="{Binding Type}"/>
+                                      DisplayMemberBinding="{Binding Path=Type}" Width="100"/>
                     <GridViewColumn Header ="CreationDate"
-                                        DisplayMemberBinding="{Binding CreationDate}"/>
+                                        DisplayMemberBinding="{Binding Path=CreationDate}" Width="100"/>
 
                 </GridView>
             </ListView.View>

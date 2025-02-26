@@ -21,7 +21,7 @@ namespace fjernfyn.Views
     /// </summary>
     public partial class InquiryOverview : Page
     {
-        InquiryOverviewViewModel iovm = new InquiryOverviewViewModel();
+        public  InquiryOverviewViewModel iovm = new InquiryOverviewViewModel();
         public InquiryOverview()
         {
             InitializeComponent();

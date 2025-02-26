@@ -16,7 +16,19 @@ namespace fjernfyn.ViewModels
             Feedbacks = new List<Feedback>();
             feedbackRepo = new FeedbackRepo();
 
-            Feedbacks = feedbackRepo.GetAllFeedback();
+            //Feedbacks = feedbackRepo.GetAllFeedback();
+
+            Feedbacks.Add(new Feedback()
+            {
+                Title = "Hjælp der ild i lokumet",
+                CreationDate = "01:12:1939",
+                Type = 0,
+                Priority = 0,
+                SoftwareProp = new Software() { Name = "Excel"},
+                
+            });
+            
+
         }
     }
 }
