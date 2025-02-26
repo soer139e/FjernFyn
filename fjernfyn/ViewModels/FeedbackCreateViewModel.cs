@@ -19,7 +19,7 @@ namespace fjernfyn
         public Feedback Feedback { get; set; }
 
         public Employee Employee { get; set; }
-        
+
         public ICommand sendCommand { get; }
         public ICommand addSoftwareCommand { get; }
 

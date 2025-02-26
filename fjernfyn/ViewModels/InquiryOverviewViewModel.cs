@@ -5,15 +5,26 @@ using System.Text;
 using System.Threading.Tasks;
 using fjernfyn.Repositories;
 using fjernfyn.Classes;
-namespace fjernfyn.viewmodels
+using System.ComponentModel;
+using Microsoft.IdentityModel.Tokens;
+namespace fjernfyn
 {
-    public class InquiryOverviewViewModel
+    public class InquiryOverviewViewModel : INotifyPropertyChanged
     {
         public List<Feedback> Feedbacks { get; set; }
         private FeedbackRepo feedbackRepo;
-        
-        public Category Categorys;
-        public List<Priority> Prioritys { get; set; }
+
+
+        private Feedback _selectedInquiry { get; set; } 
+        public Feedback SelectedInquiry
+        {
+            get { return _selectedInquiry; }
+            set { _selectedInquiry = value; OnPropertyChanged(nameof(SelectedInquiry)); }
+        }
+
+
+        public List<Category> Categorys { get; set; } = new List<Category>() { Category.Bug, Category.Feature, Category.Request }; 
+        public List<Priority> Prioritys { get; set; } = new List<Priority> { Priority.High,Priority.Medium, Priority.Low }; 
         public List<Software> Softwares { get; set; }
         
         public InquiryOverviewViewModel()
@@ -22,12 +33,9 @@ namespace fjernfyn.viewmodels
             feedbackRepo = new FeedbackRepo();
 
             //Feedbacks = feedbackRepo.GetAllFeedback();
-            Prioritys = new List<Priority>();
-            Prioritys.Add(Priority.High);
-            Prioritys.Add(Priority.Medium);
-            Prioritys.Add(Priority.Low);
 
 
+            //dummy data
             Feedbacks.Add(new Feedback()
             {
                 Title = "Hjælp der ild i lokumet",
@@ -48,6 +56,17 @@ namespace fjernfyn.viewmodels
             });
 
 
+        }
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+        protected void OnPropertyChanged(string propertyName)
+        {
+            var value = this.GetType().GetProperty(propertyName)?.GetValue(this, null);
+            PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if (propertyChanged != null)
+            {
+                propertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
         }
     }
 }

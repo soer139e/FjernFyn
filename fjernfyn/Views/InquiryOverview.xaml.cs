@@ -1,4 +1,4 @@
-﻿using fjernfyn.ViewModels;
+﻿using fjernfyn;
 using System;
 using System.Collections.Generic;
 using System.Linq;
