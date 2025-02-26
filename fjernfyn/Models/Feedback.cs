@@ -25,11 +25,6 @@ namespace fjernfyn.Classes
             Employee = new Employee();
         }
 
-        // Bruges til at vise feedback opdelt ordentligt i InquiryOverview
-        // NOT FINISHED
-        public override string ToString()
-        {
-            return $"{Title}, ";
-        }
+
     }
 }
