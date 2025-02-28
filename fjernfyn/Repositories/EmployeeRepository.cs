@@ -42,6 +42,7 @@ namespace fjernfyn.Repositories
                             valid = true;
 
                             reader.Read();
+                            emp.Id = reader.GetInt32(0);
                             emp.Email = reader.GetString(3);
                             emp.Department = (Department)Enum.Parse(typeof(Department), reader.GetString(4));
                             emp.FullName = reader.GetString(5);
