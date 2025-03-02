@@ -14,10 +14,10 @@ namespace fjernfyn.Repositories
     {
         private readonly string conString;
 
-        private List<Software> software;
+        private List<Software> softwares;
         public SoftwaresRepo() 
         {    
-            software = new List<Software>();
+            softwares = new List<Software>();
           
             IConfigurationRoot config = new ConfigurationBuilder()
             .AddJsonFile("appsettings.json")
@@ -54,7 +54,7 @@ namespace fjernfyn.Repositories
 
         public List<Software>? GetAll()
         {
-            software.Clear();
+            softwares.Clear();
             using (SqlConnection con = new SqlConnection(conString))
             {
                 con.Open();
@@ -68,13 +68,13 @@ namespace fjernfyn.Repositories
                             {
                                 ID = dr.GetInt32(0),
                                 Name = dr.GetString(1)
-                            }; software.Add(newSoftware);
+                            }; softwares.Add(newSoftware);
                         };
                     }
                 }
             }
 
-                return software;
+                return softwares;
         }
 
 

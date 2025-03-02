@@ -8,7 +8,7 @@ namespace fjernfyn.Classes
         public int Id { get; set; }
         public string Title { get; set; } = "Titel";
         public string Description { get; set; } = "Beskrivelse af problem";
-        public string CreationDate { get; set; }
+        public DateOnly CreationDate { get; set; }
         public string ErrorCode { get; set; }
         public Category Type { get; set; }
 

@@ -81,8 +81,8 @@ namespace fjernfyn.Repositories
                                 Description=dr.GetString(3),
 
                                 //Midlertidlig udkommenteret fordi databasens rækker stemmer ikke overens med koden
-                               // Type = (Category)Enum.Parse(typeof(Priority),dr.GetString(6)),
-                               // CreationDate = dr.GetString(7),
+                                Type = (Category)Enum.Parse(typeof(Category),dr.GetString(6)),
+                                CreationDate = DateOnly.FromDateTime(dr.GetDateTime(7)),
                                 ErrorCode = dr.GetString(8),
                                 Image = dr.GetString(9),
                             };

@@ -13,7 +13,8 @@ namespace fjernfyn
     {
         public List<Feedback> Feedbacks { get; set; }
         private FeedbackRepo feedbackRepo;
-
+        private SoftwaresRepo softwaresRepo;
+        
 
         private Feedback _selectedInquiry { get; set; } 
         public Feedback SelectedInquiry
@@ -23,37 +24,44 @@ namespace fjernfyn
         }
 
 
-        public List<Category> Categorys { get; set; } = new List<Category>() { Category.Bug, Category.Feature, Category.Request }; 
-        public List<Priority> Prioritys { get; set; } = new List<Priority> { Priority.High,Priority.Medium, Priority.Low }; 
-        public List<Software> Softwares { get; set; }
-        
+        public List<Category> Categorys { get;} = new List<Category>() { Category.Bug, Category.Feature, Category.Request }; 
+        public List<Priority> Prioritys { get;} = new List<Priority> { Priority.High,Priority.Medium, Priority.Low }; 
+        public List<Software> Softwares { get;}
+
+      
+
+
+
         public InquiryOverviewViewModel()
         {
             Feedbacks = new List<Feedback>();
             feedbackRepo = new FeedbackRepo();
+            Softwares = new List<Software>();
+            softwaresRepo = new SoftwaresRepo();
+            Softwares = softwaresRepo.GetAll();
 
-            //Feedbacks = feedbackRepo.GetAllFeedback();
+            Feedbacks = feedbackRepo.GetAllFeedback();
 
 
             //dummy data
-            Feedbacks.Add(new Feedback()
-            {
-                Title = "Hjælp der ild i lokumet",
-                CreationDate = "01:12:1939",
-                Type = 0,
-                Priority = 0,
-                SoftwareProp = new Software() { Name = "Excel"},
+            //Feedbacks.Add(new Feedback()
+            //{
+            //    Title = "Hjælp der ild i lokumet",
+            //    CreationDate = "01:12:1939",
+            //    Type = 0,
+            //    Priority = 0,
+            //    SoftwareProp = new Software() { Name = "Excel"},
                 
-            });
-            Feedbacks.Add(new Feedback()
-            {
-                Title = "Hjælp der ild i birk",
-                CreationDate = "01:12:1939",
-                Type = 0,
-                Priority = Priority.Low,
-                SoftwareProp = new Software() { Name = "janitor software" },
+            //});
+            //Feedbacks.Add(new Feedback()
+            //{
+            //    Title = "Hjælp der ild i birk",
+            //    CreationDate = "01:12:1939",
+            //    Type = 0,
+            //    Priority = Priority.Low,
+            //    SoftwareProp = new Software() { Name = "janitor software" },
 
-            });
+            //});
 
 
         }
