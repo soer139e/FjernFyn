@@ -90,5 +90,29 @@ namespace fjernfyn.Repositories
                 return feedbacks;
         }
 
+        public List<Feedback> SortInquirys (Software? software = null,Category? category = null,Priority? priority= null )
+        {
+            {
+                var sortedList = feedbacks.AsQueryable();
+
+                if (category.HasValue)
+                {
+                    sortedList = sortedList.Where(f => f.Type == category.Value);
+
+                }
+
+                if (priority.HasValue)
+                {
+                    sortedList = sortedList.Where(f => f.Priority == priority.Value);
+                }
+                     
+                if (software != null)
+                {
+                    sortedList = sortedList.Where(f => f.SoftwareProp.Name == software.Name );
+                }
+                
+                return sortedList.ToList(); 
+            } 
+        }
     }
 }

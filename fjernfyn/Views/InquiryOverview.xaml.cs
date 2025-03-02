@@ -14,19 +14,20 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace fjernfyn.Views
+namespace fjernfyn
 {
     /// <summary>
     /// Interaction logic for InquiryOverview.xaml
     /// </summary>
     public partial class InquiryOverview : Page
     {
-        public  InquiryOverviewViewModel iovm = new InquiryOverviewViewModel();
+        public InquiryOverviewViewModel iovm = new InquiryOverviewViewModel();
         public InquiryOverview()
         {
             InitializeComponent();
             DataContext = iovm;
-            
+
         }
+
     }
 }

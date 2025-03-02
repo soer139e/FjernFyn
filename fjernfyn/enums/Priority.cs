@@ -11,8 +11,7 @@ namespace fjernfyn
         High,
         Medium,
         Low,
-        // Midlertidlig tilføjet
-        Critical
+        None
     }
 }
 

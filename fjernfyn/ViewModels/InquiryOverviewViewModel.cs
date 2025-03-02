@@ -23,8 +23,12 @@ namespace fjernfyn
         }
 
 
-        public List<Category> Categorys { get; set; } = new List<Category>() { Category.Bug, Category.Feature, Category.Request }; 
-        public List<Priority> Prioritys { get; set; } = new List<Priority> { Priority.High,Priority.Medium, Priority.Low }; 
+
+        public Category selectedCategory { get; set; }
+        public List<Category> Categorys  = new List<Category>() {Category.Bug, Category.Feature,Category.Request,Category.None};
+        public List<Priority> Prioritys = new List<Priority>() {Priority.High,Priority.Medium,Priority.Low,Priority.None };
+        public Priority selectedPriority { get; set; }
+
         public List<Software> Softwares { get; set; }
         
         public InquiryOverviewViewModel()

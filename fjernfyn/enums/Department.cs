@@ -6,6 +6,7 @@
         Finance,
         Legal,
         Administration,
-        HR
+        HR,
+        None
     }
 }
