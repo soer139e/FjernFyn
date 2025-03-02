@@ -104,5 +104,24 @@ namespace fjernfyn.Repositories
             return feedbacks;
         }
 
+        public List<Feedback> FilterInquirys(List<object>? filters)
+        {
+            List<Feedback> result = new List<Feedback>();
+
+            // sql statement
+            // using (SqlCommand cmd = new SqlCommand(SELECT * FROM Inquirys where Priority = @prio AND Software = @soft and Category = @Cat,con)
+            // cmd.Parameters.AddWithValue("@Priority", variabel);
+
+
+            foreach (object? filter in filters) {
+                if (filter is Priority prio && prio != null)
+                {
+                    
+                }
+            }
+            
+            return result;
+
+        }
     }
 }

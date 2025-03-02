@@ -14,6 +14,7 @@ namespace fjernfyn
         public List<Feedback> Feedbacks { get; set; }
         private FeedbackRepo feedbackRepo;
 
+        public List<Object> Objects { get; set; }   
 
         private Feedback _selectedInquiry { get; set; } 
         public Feedback SelectedInquiry
