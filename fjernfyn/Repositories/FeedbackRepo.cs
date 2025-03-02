@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -64,11 +65,9 @@ namespace fjernfyn.Repositories
                                 Id = dr.GetInt32(0),
                                 Priority=(Priority)Enum.Parse(typeof(Priority),dr.GetString(1)),
                                 Title = dr.GetString(2),
-                                Description=dr.GetString(3),
-
-                                //Midlertidlig udkommenteret fordi databasens rækker stemmer ikke overens med koden
-                               // Type = (Category)Enum.Parse(typeof(Priority),dr.GetString(6)),
-                               // CreationDate = dr.GetString(7),
+                                Description=dr.GetString(3), 
+                                Type = (Category)Enum.Parse(typeof(Priority),dr.GetString(6)),
+                                CreationDate = dr.GetString(7),
                                 ErrorCode = dr.GetString(8),
                                 Image = dr.GetString(9),
                             };
@@ -90,20 +89,21 @@ namespace fjernfyn.Repositories
                 return feedbacks;
         }
 
-        public List<Feedback> SortInquirys (Software? software = null,Category? category = null,Priority? priority= null )
+        public List<Feedback> SortInquirys (Software? software,Category? category, Priority? priority)
         {
             {
                 var sortedList = feedbacks.AsQueryable();
 
-                if (category.HasValue)
+                if (category != null)
                 {
                     sortedList = sortedList.Where(f => f.Type == category.Value);
-
+                    //sortedList = sortedList.Where(f => f.Type != null && f.Type.Equals(category.Value));
                 }
 
-                if (priority.HasValue)
+                if (priority != null)
                 {
                     sortedList = sortedList.Where(f => f.Priority == priority.Value);
+                    //sortedList = sortedList.Where(f=> f.Priority != null &&  f.Priority.Equals(priority.Value));
                 }
                      
                 if (software != null)

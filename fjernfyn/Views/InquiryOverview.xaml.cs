@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace fjernfyn
+namespace fjernfyn.Views
 {
     /// <summary>
     /// Interaction logic for InquiryOverview.xaml
@@ -28,6 +28,7 @@ namespace fjernfyn
             DataContext = iovm;
 
         }
+
 
     }
 }
