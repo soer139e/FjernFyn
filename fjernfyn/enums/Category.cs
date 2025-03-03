@@ -4,6 +4,7 @@
     {
         Request,
         Feature,
-        Bug
+        Bug,
+        None
     }
 }

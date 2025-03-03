@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -104,5 +105,30 @@ namespace fjernfyn.Repositories
             return feedbacks;
         }
 
+        public List<Feedback> SortInquirys (Software? software,Category? category, Priority? priority)
+        {
+            {
+                var sortedList = feedbacks.AsQueryable();
+
+                if (category != null)
+                {
+                    sortedList = sortedList.Where(f => f.Type == category.Value);
+                    //sortedList = sortedList.Where(f => f.Type != null && f.Type.Equals(category.Value));
+                }
+
+                if (priority != null)
+                {
+                    sortedList = sortedList.Where(f => f.Priority == priority.Value);
+                    //sortedList = sortedList.Where(f=> f.Priority != null &&  f.Priority.Equals(priority.Value));
+                }
+                     
+                if (software != null)
+                {
+                    sortedList = sortedList.Where(f => f.SoftwareProp.Name == software.Name );
+                }
+                
+                return sortedList.ToList(); 
+            } 
+        }
     }
 }

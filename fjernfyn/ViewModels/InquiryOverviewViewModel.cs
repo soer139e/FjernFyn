@@ -7,11 +7,13 @@ using fjernfyn.Repositories;
 using fjernfyn.Classes;
 using System.ComponentModel;
 using Microsoft.IdentityModel.Tokens;
+using System.Windows.Input;
+using System.Collections.ObjectModel;
 namespace fjernfyn
 {
     public class InquiryOverviewViewModel : INotifyPropertyChanged
     {
-        public List<Feedback> Feedbacks { get; set; }
+        public ObservableCollection <Feedback> Feedbacks { get; set; }
         private FeedbackRepo feedbackRepo;
         private SoftwaresRepo softwaresRepo;
         
@@ -24,24 +26,45 @@ namespace fjernfyn
         }
 
 
-        public List<Category> Categorys { get;} = new List<Category>() { Category.Bug, Category.Feature, Category.Request }; 
-        public List<Priority> Prioritys { get;} = new List<Priority> { Priority.High,Priority.Medium, Priority.Low }; 
-        public List<Software> Softwares { get;}
 
-      
+        
+        public List<Category> Categorys { get;  } = new List<Category>() {Category.Bug, Category.Feature,Category.Request,Category.None};
+        public List<Priority> Prioritys { get; } = new List<Priority>() {Priority.High,Priority.Medium,Priority.Low,Priority.None};
 
-
-
+        private Priority _selectedPriority;
+        public Priority SelectedPriority
+        {
+            get { return _selectedPriority; }
+            set
+            {
+                _selectedPriority = value;
+                OnPropertyChanged(nameof(SelectedPriority));
+                SortParametersChangedCommand.Execute(this);
+            }
+        }
+        private Category _selectedCategory;
+        public Category SelectedCategory
+        {
+            get { return _selectedCategory; }
+            set
+            {
+                _selectedCategory = value;
+                OnPropertyChanged(nameof(SelectedCategory));
+                SortParametersChangedCommand.Execute(this);
+            }
+        }
+        public List<Software> Softwares { get; set; }
+        
         public InquiryOverviewViewModel()
         {
-            Feedbacks = new List<Feedback>();
+            Feedbacks = new ObservableCollection<Feedback>();
             feedbackRepo = new FeedbackRepo();
             Softwares = new List<Software>();
             softwaresRepo = new SoftwaresRepo();
             Softwares = softwaresRepo.GetAll();
 
-            Feedbacks = feedbackRepo.GetAllFeedback();
-
+            //Feedbacks = feedbackRepo.GetAllFeedback();
+            SortParametersChangedCommand = new CommandHandler(SortParameterSelected);
 
             //dummy data
             //Feedbacks.Add(new Feedback()
@@ -65,6 +88,7 @@ namespace fjernfyn
 
 
         }
+        public ICommand SortParametersChangedCommand { get; }
 
         public event PropertyChangedEventHandler? PropertyChanged;
         protected void OnPropertyChanged(string propertyName)
@@ -75,6 +99,16 @@ namespace fjernfyn
             {
                 propertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
+        }
+        public void SortParameterSelected()
+        {
+            ObservableCollection< Feedback > sortedFeedback = new ObservableCollection<Feedback>(feedbackRepo.SortInquirys(null, SelectedCategory, SelectedPriority));
+            Feedbacks.Clear();
+            
+           foreach(Feedback feedback in sortedFeedback)
+           {
+                Feedbacks.Add(feedback);
+           }
         }
     }
 }
