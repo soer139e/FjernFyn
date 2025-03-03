@@ -11,7 +11,7 @@ namespace fjernfyn
         High,
         Medium,
         Low,
-        None
+        All
     }
 }
 

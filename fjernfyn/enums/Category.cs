@@ -5,6 +5,6 @@
         Request,
         Feature,
         Bug,
-        None
+        All
     }
 }

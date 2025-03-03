@@ -55,6 +55,7 @@ namespace fjernfyn.Repositories
         public List<Software>? GetAll()
         {
             softwares.Clear();
+            softwares.Add(new Software() { Name = "All" });
             using (SqlConnection con = new SqlConnection(conString))
             {
                 con.Open();
@@ -72,6 +73,7 @@ namespace fjernfyn.Repositories
                         };
                     }
                 }
+                
             }
 
                 return softwares;

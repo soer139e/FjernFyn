@@ -106,14 +106,14 @@ namespace fjernfyn.Repositories
             return feedbacks;
         }
 
-        public List<Feedback> SortInquirys (Software? software =null,Category? category = null, Priority? priority = null)
+        public List<Feedback> SortInquirys (Software? software =null,Category? category = null, Priority? priority = null, string? DateFilter = null)
         {
             {
                 var sortedList = feedbacks.AsQueryable();
 
                 if (category != null)
                 {
-                    if (category!= Category.None) {
+                    if (category!= Category.All) {
                         sortedList = sortedList.Where(f => f.Type == category.Value);
                         //sortedList = sortedList.Where(f => f.Type != null && f.Type.Equals(category.Value));
                     }
@@ -121,7 +121,7 @@ namespace fjernfyn.Repositories
 
                 if (priority != null)
                 {
-                    if (priority != Priority.None)
+                    if (priority != Priority.All)
                     {
                         sortedList = sortedList.Where(f => f.Priority == priority.Value);
                         //sortedList = sortedList.Where(f=> f.Priority != null &&  f.Priority.Equals(priority.Value));
@@ -130,9 +130,20 @@ namespace fjernfyn.Repositories
                      
                 if (software != null)
                 {
-                    
+                    if (software.Name != "All") {
                         sortedList = sortedList.Where(f => f.SoftwareProp.Name == software.Name);
-                    
+                    }
+                }
+                if (DateFilter != null)
+                {
+                    if (DateFilter == "Sorter Stigende")
+                    {
+                        sortedList = sortedList.OrderBy(f => f.CreationDate);
+                    }
+                    if(DateFilter == "Sorter Faldende")
+                    {
+                        sortedList = sortedList.OrderByDescending(f => f.CreationDate);
+                    }
                 }
                 
                 return sortedList.ToList(); 
