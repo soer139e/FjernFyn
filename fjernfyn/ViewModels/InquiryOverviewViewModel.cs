@@ -25,6 +25,14 @@ namespace fjernfyn
             set { _selectedInquiry = value; OnPropertyChanged(nameof(SelectedInquiry)); }
         }
 
+        private Software _selectedSoftware { get; set; }
+        public Software SelectedSoftware
+        {
+            get { return _selectedSoftware; }
+            set { _selectedSoftware = value; OnPropertyChanged(nameof(SelectedSoftware));
+                SortParametersChangedCommand.Execute(this);
+            }
+        }
 
 
         
@@ -57,34 +65,16 @@ namespace fjernfyn
         
         public InquiryOverviewViewModel()
         {
-            Feedbacks = new ObservableCollection<Feedback>();
+            
             feedbackRepo = new FeedbackRepo();
             Softwares = new List<Software>();
             softwaresRepo = new SoftwaresRepo();
             Softwares = softwaresRepo.GetAll();
-
-            //Feedbacks = feedbackRepo.GetAllFeedback();
+            Feedbacks = new ObservableCollection<Feedback>(feedbackRepo.GetAllFeedback());
             SortParametersChangedCommand = new CommandHandler(SortParameterSelected);
-
-            //dummy data
-            //Feedbacks.Add(new Feedback()
-            //{
-            //    Title = "Hjælp der ild i lokumet",
-            //    CreationDate = "01:12:1939",
-            //    Type = 0,
-            //    Priority = 0,
-            //    SoftwareProp = new Software() { Name = "Excel"},
-                
-            //});
-            //Feedbacks.Add(new Feedback()
-            //{
-            //    Title = "Hjælp der ild i birk",
-            //    CreationDate = "01:12:1939",
-            //    Type = 0,
-            //    Priority = Priority.Low,
-            //    SoftwareProp = new Software() { Name = "janitor software" },
-
-            //});
+            SelectedCategory = Category.None;
+            SelectedPriority = Priority.None;
+            
 
 
         }
@@ -102,7 +92,7 @@ namespace fjernfyn
         }
         public void SortParameterSelected()
         {
-            ObservableCollection< Feedback > sortedFeedback = new ObservableCollection<Feedback>(feedbackRepo.SortInquirys(null, SelectedCategory, SelectedPriority));
+            ObservableCollection< Feedback > sortedFeedback = new ObservableCollection<Feedback>(feedbackRepo.SortInquirys(SelectedSoftware, SelectedCategory, SelectedPriority));
             Feedbacks.Clear();
             
            foreach(Feedback feedback in sortedFeedback)

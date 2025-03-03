@@ -56,14 +56,16 @@
 
         <ComboBox IsEditable="True" IsReadOnly="True" Text="Category" Grid.Column="1" HorizontalAlignment="Left" 
                   Margin="171,32,0,0" VerticalAlignment="Top" Width="120" FontSize="20" Grid.ColumnSpan="2"
-                       ItemsSource="{Binding Path=Categorys}"
+                  
+                  ItemsSource="{Binding Path=Categorys}"
                         SelectedItem="{Binding SelectedCategory, Mode=TwoWay}"/>
 
         
 
 
         <ComboBox IsEditable="True" IsReadOnly="True" Text="System" HorizontalAlignment="Left" Margin="98,32,0,0" VerticalAlignment="Top" 
-                  Width="120" FontSize="20" ItemsSource="{Binding Path=Softwares}"/>
+                  Width="120" FontSize="20" ItemsSource="{Binding Path=Softwares}"
+                  SelectedItem="{Binding SelectedSoftware, Mode=TwoWay}"/>
 
         
         <ComboBox IsEditable="True" IsReadOnly="True" Text="Dato" Grid.Column="2" HorizontalAlignment="Left" Margin="60,32,0,0" VerticalAlignment="Top" Width="120" FontSize="20" />

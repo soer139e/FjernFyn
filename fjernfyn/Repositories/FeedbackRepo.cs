@@ -21,6 +21,7 @@ namespace fjernfyn.Repositories
             .Build();
 
             conString = config.GetConnectionString("DB_KEY");
+            feedbacks = GetAllFeedback();
 
         }
         public void CreateFeedback(Feedback feedback)
@@ -105,26 +106,33 @@ namespace fjernfyn.Repositories
             return feedbacks;
         }
 
-        public List<Feedback> SortInquirys (Software? software,Category? category, Priority? priority)
+        public List<Feedback> SortInquirys (Software? software =null,Category? category = null, Priority? priority = null)
         {
             {
                 var sortedList = feedbacks.AsQueryable();
 
                 if (category != null)
                 {
-                    sortedList = sortedList.Where(f => f.Type == category.Value);
-                    //sortedList = sortedList.Where(f => f.Type != null && f.Type.Equals(category.Value));
+                    if (category!= Category.None) {
+                        sortedList = sortedList.Where(f => f.Type == category.Value);
+                        //sortedList = sortedList.Where(f => f.Type != null && f.Type.Equals(category.Value));
+                    }
                 }
 
                 if (priority != null)
                 {
-                    sortedList = sortedList.Where(f => f.Priority == priority.Value);
-                    //sortedList = sortedList.Where(f=> f.Priority != null &&  f.Priority.Equals(priority.Value));
+                    if (priority != Priority.None)
+                    {
+                        sortedList = sortedList.Where(f => f.Priority == priority.Value);
+                        //sortedList = sortedList.Where(f=> f.Priority != null &&  f.Priority.Equals(priority.Value));
+                    }
                 }
                      
                 if (software != null)
                 {
-                    sortedList = sortedList.Where(f => f.SoftwareProp.Name == software.Name );
+                    
+                        sortedList = sortedList.Where(f => f.SoftwareProp.Name == software.Name);
+                    
                 }
                 
                 return sortedList.ToList(); 
