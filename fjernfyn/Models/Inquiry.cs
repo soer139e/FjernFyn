@@ -3,7 +3,7 @@ using System.Windows.Controls;
 
 namespace fjernfyn.Classes
 {
-    public class Feedback
+    public class Inquiry
     {
         public int Id { get; set; }
         public string Title { get; set; } = "Titel";
@@ -19,7 +19,7 @@ namespace fjernfyn.Classes
 
         public string Image { get; set; }
 
-        public Feedback()
+        public Inquiry()
         {
             SoftwareProp = new Software();
             Employee = new Employee();

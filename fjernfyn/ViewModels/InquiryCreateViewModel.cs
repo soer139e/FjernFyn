@@ -6,16 +6,16 @@ using System.Windows.Input;
 
 namespace fjernfyn
 {
-    public class FeedbackCreateViewModel : INotifyPropertyChanged
+    public class InquiryCreateViewModel : INotifyPropertyChanged
     {
         public List<string> software {  get; set; }
-        private FeedbackRepo feedbackRepo;
+        private InquiryRepo inquiryRepo;
         private SoftwaresRepo softwaresRepo { get; set; }
 
 
-        private Window feedbackWindow {  get; set; }
+        private Window InquiryWindow {  get; set; }
 
-        public Feedback Feedback { get; set; }
+        public Inquiry Inquiry { get; set; }
 
         public Employee Employee { get; set; }
 
@@ -46,17 +46,17 @@ namespace fjernfyn
             set { _department = value; OnPropertyChanged(nameof(Department));}
         }
 
-        private string? _feedbackContent;
+        private string? _inquiryContent;
 
-        public string? FeedbackContent;
+        public string? InquiryContent;
 
 
         /// <summary>
         /// TOOD: implement the employee class inside the constructor, call the employee so that we can fetch the information and databind it across views.
         /// </summary>
-        public FeedbackCreateViewModel(Window window, Employee emp) 
+        public InquiryCreateViewModel(Window window, Employee emp) 
         {
-            feedbackRepo = new FeedbackRepo();
+            inquiryRepo = new InquiryRepo();
 
             softwaresRepo = new SoftwaresRepo();
             software = new List<string>();
@@ -75,9 +75,9 @@ namespace fjernfyn
 
             // In my personal opinion, going with option A, not only gives us consistency throughout the code,
             // but is also objectively the better option if we want to not go insane writing this mess.
-            Feedback = new Feedback();
+            Inquiry = new Inquiry();
 
-            feedbackWindow = window;
+            InquiryWindow = window;
             Employee = emp;
         } 
         
@@ -98,12 +98,12 @@ namespace fjernfyn
             Software bitch = new Software();
             bitch.Name = "Trello";
             bitch.ID = 4;
-            Feedback.SoftwareProp = bitch;
+            Inquiry.SoftwareProp = bitch;
 
 
-            Feedback.Employee = Employee;
+            Inquiry.Employee = Employee;
 
-            feedbackRepo.CreateFeedback(Feedback);
+            inquiryRepo.CreateInquiry(Inquiry);
             // TODO: change this fuckass message
             MessageBox.Show("godt gået... god dreng 👏👏👏👏👏👏👏", "success");
         }

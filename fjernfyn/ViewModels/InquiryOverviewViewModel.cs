@@ -11,12 +11,12 @@ namespace fjernfyn
 {
     public class InquiryOverviewViewModel : INotifyPropertyChanged
     {
-        public List<Feedback> Feedbacks { get; set; }
-        private FeedbackRepo feedbackRepo;
+        public List<Inquiry> Inquiries { get; set; }
+        private InquiryRepo inquiryRepo;
 
 
-        private Feedback _selectedInquiry { get; set; } 
-        public Feedback SelectedInquiry
+        private Inquiry _selectedInquiry { get; set; } 
+        public Inquiry SelectedInquiry
         {
             get { return _selectedInquiry; }
             set { _selectedInquiry = value; OnPropertyChanged(nameof(SelectedInquiry)); }
@@ -29,14 +29,14 @@ namespace fjernfyn
         
         public InquiryOverviewViewModel()
         {
-            Feedbacks = new List<Feedback>();
-            feedbackRepo = new FeedbackRepo();
+            Inquiries = new List<Inquiry>();
+            inquiryRepo = new InquiryRepo();
 
             //Feedbacks = feedbackRepo.GetAllFeedback();
 
 
             //dummy data
-            Feedbacks.Add(new Feedback()
+            Inquiries.Add(new Inquiry()
             {
                 Title = "Hjælp der ild i lokumet",
                 CreationDate = "01:12:1939",
@@ -45,7 +45,7 @@ namespace fjernfyn
                 SoftwareProp = new Software() { Name = "Excel"},
                 
             });
-            Feedbacks.Add(new Feedback()
+            Inquiries.Add(new Inquiry()
             {
                 Title = "Hjælp der ild i birk",
                 CreationDate = "01:12:1939",
