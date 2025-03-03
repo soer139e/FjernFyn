@@ -8,9 +8,9 @@ namespace fjernfyn
 {
     public class FeedbackCreateViewModel : INotifyPropertyChanged
     {
-        public List<string> software {  get; set; }
+        public List<Software> softwares {  get; set; }
         private FeedbackRepo feedbackRepo;
-        private SoftwaresRepo softwaresRepo { get; set; }
+        private SoftwaresRepo softwareRepo { get; set; }
 
 
         private Window feedbackWindow {  get; set; }
@@ -50,7 +50,16 @@ namespace fjernfyn
 
         public string? FeedbackContent;
 
+        private string? _errorCode;
 
+        public string? ErrorCode
+        {
+            get { return _errorCode; }
+            set {   }
+        }
+         
+        public List<Category> Categorys { get; } = new List<Category>() { Category.Bug, Category.Feature, Category.Request };
+        public List<Priority> Prioritys { get; } = new List<Priority>() { Priority.High, Priority.Medium, Priority.Low};
         /// <summary>
         /// TOOD: implement the employee class inside the constructor, call the employee so that we can fetch the information and databind it across views.
         /// </summary>
@@ -58,15 +67,17 @@ namespace fjernfyn
         {
             feedbackRepo = new FeedbackRepo();
 
-            softwaresRepo = new SoftwaresRepo();
-            software = new List<string>();
+            softwareRepo = new SoftwaresRepo();
+            softwares = new List<Software>();
 
-            foreach (var obj in softwaresRepo.GetAll())
-            {
-                //maybe we should change this name too
-                string[] cuck = obj.ToString().Split(";");
-                software.Add(cuck[1]);
-            }
+
+            softwares = softwareRepo.GetAll();
+            //foreach (var obj in softwaresRepo.GetAll())
+            //{
+            //    //maybe we should change this name too
+            //    string[] cuck = obj.ToString().Split(";");
+            //    software.Add(cuck[1]);
+            //}
             sendCommand = new CommandHandler(SendClicked);
             //addSoftwareCommand = new CommandHandler(PlusClicked);
             //TODO: We need to either
@@ -95,10 +106,10 @@ namespace fjernfyn
             // Also.... maybe change the variable name
             // THESE ARE DUMMY VALUES! I BEG YOU!!!!
            
-            Software bitch = new Software();
-            bitch.Name = "Trello";
-            bitch.ID = 4;
-            Feedback.SoftwareProp = bitch;
+            //Software software = new Software();
+            //software.Name = "Trello";
+            //software.ID = 4;
+            //Feedback.SoftwareProp = software;
 
 
             Feedback.Employee = Employee;
