@@ -1,8 +1,10 @@
 ﻿using fjernfyn.Classes;
 using fjernfyn.Repositories;
+using Microsoft.Win32;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
+using System.IO;
 
 namespace fjernfyn
 {
@@ -21,6 +23,7 @@ namespace fjernfyn
 
         public ICommand sendCommand { get; }
         //public ICommand addSoftwareCommand { get; }
+        public ICommand AddErrorImageCommand { get; }
 
         private string? _employeeName;
 
@@ -50,15 +53,6 @@ namespace fjernfyn
 
         public string? FeedbackContent;
 
-        //private string? _errorcode;
-
-        //public string? errorcode
-        //{
-        //    get { return _errorcode; }
-        //    set { _errorcode = value; onpropertychanged(nameof(department)); }
-        //}
-
-
         public List<Category> Categorys { get; } = new List<Category>() { Category.Bug, Category.Feature, Category.Request };
         public List<Priority> Prioritys { get; } = new List<Priority>() { Priority.High, Priority.Medium, Priority.Low};
         /// <summary>
@@ -71,14 +65,8 @@ namespace fjernfyn
             softwareRepo = new SoftwaresRepo();
             softwares = new List<Software>();
 
-         
+            AddErrorImageCommand = new CommandHandler(AddErrorImage);
             softwares = softwareRepo.GetAll();
-            //foreach (var obj in softwaresRepo.GetAll())
-            //{
-            //    //maybe we should change this name too
-            //    string[] cuck = obj.ToString().Split(";");
-            //    software.Add(cuck[1]);
-            //}
             sendCommand = new CommandHandler(SendClicked);
             //addSoftwareCommand = new CommandHandler(PlusClicked);
             //TODO: We need to either
@@ -89,7 +77,7 @@ namespace fjernfyn
             // but is also objectively the better option if we want to not go insane writing this mess.
             Feedback = new Feedback();
             Feedback.Description = "Hvad prøver du at gøre?\n \r\nTrin-for-trin gengivelse\r\n \nHvad gjorde du, før problemet opstod:";
-            Feedback.Image = "";
+            Feedback.Image = null;
             Feedback.ErrorCode = "";
             feedbackWindow = window;
             Employee = emp;
@@ -120,6 +108,23 @@ namespace fjernfyn
             feedbackRepo.CreateFeedback(Feedback);
            
             MessageBox.Show("Forespørgsel oprettet", "success");
+        }
+        public void AddErrorImage()
+        {
+            string result;
+            OpenFileDialog Dialog  = new OpenFileDialog();
+
+            if (Dialog.ShowDialog() == true)
+            {
+                result = Dialog.FileName;
+                if (!string.IsNullOrEmpty(result) && File.Exists(result))
+                {
+                    Feedback.Image = File.ReadAllBytes(result);
+                }
+
+            }
+            
+            
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

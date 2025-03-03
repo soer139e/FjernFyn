@@ -57,7 +57,7 @@
         
         <!--{Binding FeedbackContent}-->
 
-        <Button x:Name="btnImg" Content="Vedhæft billede" FontSize="20" FontFamily="Leelawadee UI" Grid.Row="2" Grid.Column="3" Margin="50,25,50,0" VerticalAlignment="Top" Height="40"/>
+        <Button x:Name="btnImg" Content="Vedhæft billede" FontSize="20" FontFamily="Leelawadee UI" Grid.Row="2" Grid.Column="3" Margin="50,25,50,0" VerticalAlignment="Top" Height="40" Command="{Binding AddErrorImageCommand}"/>
 
 
         <Label Content="Fejlkode" Grid.Row="2" Grid.Column="2" FontSize="20" FontFamily="Leelawadee UI" HorizontalAlignment="Center" Margin="0,90,0,55"/>
