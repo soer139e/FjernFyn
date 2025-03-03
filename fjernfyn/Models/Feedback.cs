@@ -17,7 +17,7 @@ namespace fjernfyn.Classes
         public Software SoftwareProp { get; set; }
         public Priority Priority { get; set; }
 
-        public string Image { get; set; }
+        public byte[] Image { get; set; }
 
         public Feedback()
         {

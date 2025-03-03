@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using fjernfyn.Classes;
+﻿using fjernfyn.Classes;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
+using System.Data;
 
 namespace fjernfyn.Repositories
 {
@@ -40,20 +35,22 @@ namespace fjernfyn.Repositories
                     }
                 }
 
+
                 using (SqlCommand cmd = new SqlCommand("INSERT INTO Feedback (Priority, Title, Description, Category, CreationDate, EmployeeID, SoftwareID, ErrorCode, Image) " +
             "VALUES (@Priority, @Title, @Description, @Category, @CreationDate, @EmployeeID, @SoftwareID, @ErrorCode, @Image)", con))
                 {
-                    cmd.Parameters.AddWithValue("@Priority", feedback.Priority);
+                    cmd.Parameters.AddWithValue("@Priority", feedback.Priority.ToString());
                     cmd.Parameters.AddWithValue("@Title", feedback.Title);
                     cmd.Parameters.AddWithValue("@Description", feedback.Description);
-                    cmd.Parameters.AddWithValue("@Category", feedback.Type);
-                    //TODO: Databind the creation data, AKA MAKE EVERYTHING BE A DATETIME.
-                    cmd.Parameters.AddWithValue("@CreationDate", "2025-02-25"); // Use fixed dummy date as string
+                    cmd.Parameters.AddWithValue("@Category", feedback.Type.ToString());
+
+                    cmd.Parameters.AddWithValue("@CreationDate", DateOnly.FromDateTime(DateTime.Now));
                     cmd.Parameters.AddWithValue("@EmployeeID", feedback.Employee.Id);
                     cmd.Parameters.AddWithValue("@SoftwareID", feedback.SoftwareProp.ID);
-                    //TODO: also databind these two little fellas.
-                    cmd.Parameters.AddWithValue("@ErrorCode", "stupid");
-                    cmd.Parameters.AddWithValue("@Image", "not real");
+
+                    cmd.Parameters.AddWithValue("@ErrorCode", feedback.ErrorCode);
+                    var imageParam = cmd.Parameters.Add("@Image", SqlDbType.VarBinary, -1);
+                    imageParam.Value = (object)feedback.Image ?? DBNull.Value;
 
                     cmd.ExecuteNonQuery();
                 }
@@ -80,19 +77,19 @@ namespace fjernfyn.Repositories
                                 Id = dr.GetInt32(0),
                                 Priority = (Priority)Enum.Parse(typeof(Priority), dr.GetString(1)),
                                 Title = dr.GetString(2),
-                                Description=dr.GetString(3),
+                                Description = dr.GetString(3),
 
                                 //Midlertidlig udkommenteret fordi databasens rækker stemmer ikke overens med koden
-                                Type = (Category)Enum.Parse(typeof(Category),dr.GetString(6)),
+                                Type = (Category)Enum.Parse(typeof(Category), dr.GetString(6)),
                                 CreationDate = DateOnly.FromDateTime(dr.GetDateTime(7)),
                                 ErrorCode = dr.GetString(8),
-                                Image = dr.GetString(9),
+                                Image = dr.IsDBNull(9) ? null : (byte[])dr[9]
                             };
                             feedback.Employee.Username = dr.GetString(11);
-                            if(!dr.IsDBNull(11))
-                                 feedback.Employee.Username = dr.GetString(11);
+                            if (!dr.IsDBNull(11))
+                                feedback.Employee.Username = dr.GetString(11);
 
-                            feedback.Employee.Department = (Department)Enum.Parse(typeof(Department),dr.GetString(14));
+                            feedback.Employee.Department = (Department)Enum.Parse(typeof(Department), dr.GetString(14));
                             feedback.Employee.FullName = dr.GetString(15);
 
                             feedback.SoftwareProp.ID = dr.GetInt32(4);
@@ -145,9 +142,9 @@ namespace fjernfyn.Repositories
                         sortedList = sortedList.OrderByDescending(f => f.CreationDate);
                     }
                 }
-                
-                return sortedList.ToList(); 
-            } 
+
+                return sortedList.ToList();
+            }
         }
     }
 }

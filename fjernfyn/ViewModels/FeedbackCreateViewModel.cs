@@ -1,16 +1,18 @@
 ﻿using fjernfyn.Classes;
 using fjernfyn.Repositories;
+using Microsoft.Win32;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
+using System.IO;
 
 namespace fjernfyn
 {
     public class FeedbackCreateViewModel : INotifyPropertyChanged
     {
-        public List<string> software {  get; set; }
+        public List<Software> softwares {  get; set; }
         private FeedbackRepo feedbackRepo;
-        private SoftwaresRepo softwaresRepo { get; set; }
+        private SoftwaresRepo softwareRepo { get; set; }
 
 
         private Window feedbackWindow {  get; set; }
@@ -21,6 +23,7 @@ namespace fjernfyn
 
         public ICommand sendCommand { get; }
         //public ICommand addSoftwareCommand { get; }
+        public ICommand AddErrorImageCommand { get; }
 
         private string? _employeeName;
 
@@ -50,7 +53,8 @@ namespace fjernfyn
 
         public string? FeedbackContent;
 
-
+        public List<Category> Categorys { get; } = new List<Category>() { Category.Bug, Category.Feature, Category.Request };
+        public List<Priority> Prioritys { get; } = new List<Priority>() { Priority.High, Priority.Medium, Priority.Low};
         /// <summary>
         /// TOOD: implement the employee class inside the constructor, call the employee so that we can fetch the information and databind it across views.
         /// </summary>
@@ -58,15 +62,11 @@ namespace fjernfyn
         {
             feedbackRepo = new FeedbackRepo();
 
-            softwaresRepo = new SoftwaresRepo();
-            software = new List<string>();
+            softwareRepo = new SoftwaresRepo();
+            softwares = new List<Software>();
 
-            foreach (var obj in softwaresRepo.GetAll())
-            {
-                //maybe we should change this name too
-                string[] cuck = obj.ToString().Split(";");
-                software.Add(cuck[1]);
-            }
+            AddErrorImageCommand = new CommandHandler(AddErrorImage);
+            softwares = softwareRepo.GetAll();
             sendCommand = new CommandHandler(SendClicked);
             //addSoftwareCommand = new CommandHandler(PlusClicked);
             //TODO: We need to either
@@ -76,7 +76,9 @@ namespace fjernfyn
             // In my personal opinion, going with option A, not only gives us consistency throughout the code,
             // but is also objectively the better option if we want to not go insane writing this mess.
             Feedback = new Feedback();
-
+            Feedback.Description = "Hvad prøver du at gøre?\n \r\nTrin-for-trin gengivelse\r\n \nHvad gjorde du, før problemet opstod:";
+            Feedback.Image = null;
+            Feedback.ErrorCode = "";
             feedbackWindow = window;
             Employee = emp;
         } 
@@ -95,17 +97,34 @@ namespace fjernfyn
             // Also.... maybe change the variable name
             // THESE ARE DUMMY VALUES! I BEG YOU!!!!
            
-            Software bitch = new Software();
-            bitch.Name = "Trello";
-            bitch.ID = 4;
-            Feedback.SoftwareProp = bitch;
+            //Software software = new Software();
+            //software.Name = "Trello";
+            //software.ID = 4;
+            //Feedback.SoftwareProp = software;
 
 
             Feedback.Employee = Employee;
-
+          
             feedbackRepo.CreateFeedback(Feedback);
-            // TODO: change this fuckass message
-            MessageBox.Show("godt gået... god dreng 👏👏👏👏👏👏👏", "success");
+           
+            MessageBox.Show("Forespørgsel oprettet", "success");
+        }
+        public void AddErrorImage()
+        {
+            string result;
+            OpenFileDialog Dialog  = new OpenFileDialog();
+
+            if (Dialog.ShowDialog() == true)
+            {
+                result = Dialog.FileName;
+                if (!string.IsNullOrEmpty(result) && File.Exists(result))
+                {
+                    Feedback.Image = File.ReadAllBytes(result);
+                }
+
+            }
+            
+            
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
