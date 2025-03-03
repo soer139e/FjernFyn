@@ -10,12 +10,12 @@ namespace fjernfyn.Classes
         public string Description { get; set; } = "Beskrivelse af problem";
         public DateOnly CreationDate { get; set; }
         public string ErrorCode { get; set; }
-        public Category Type { get; set; }
+        public Category? Type { get; set; } = null;
 
         public Employee Employee { get; set; }
 
         public Software SoftwareProp { get; set; }
-        public Priority Priority { get; set; }
+        public Priority? Priority { get; set; } = null;
 
         public byte[] Image { get; set; }
 

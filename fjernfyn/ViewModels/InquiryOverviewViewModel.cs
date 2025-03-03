@@ -16,7 +16,8 @@ namespace fjernfyn
         public ObservableCollection <Feedback> Feedbacks { get; set; }
         private FeedbackRepo feedbackRepo;
         private SoftwaresRepo softwaresRepo;
-        
+
+        public List<string> DateFilters { get; set; } = new List<string>() { "Sorter Stigende", "Sorter Faldende" };
         private string _selectedDateFilter {  get; set; }
         public string SelectedDateFilter
         {

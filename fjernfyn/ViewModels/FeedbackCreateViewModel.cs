@@ -10,11 +10,11 @@ namespace fjernfyn
 {
     public class FeedbackCreateViewModel : INotifyPropertyChanged
     {
-        public List<Software> softwares {  get; set; }
+        public List<Software> softwares { get; set; }
         private FeedbackRepo feedbackRepo;
         private SoftwaresRepo softwareRepo { get; set; }
 
-
+        
         private Window feedbackWindow {  get; set; }
 
         public Feedback Feedback { get; set; }
@@ -77,7 +77,7 @@ namespace fjernfyn
             // but is also objectively the better option if we want to not go insane writing this mess.
             Feedback = new Feedback();
             Feedback.Description = "Hvad prøver du at gøre?\n \r\nTrin-for-trin gengivelse\r\n \nHvad gjorde du, før problemet opstod:";
-            Feedback.Image = null;
+
             Feedback.ErrorCode = "";
             feedbackWindow = window;
             Employee = emp;

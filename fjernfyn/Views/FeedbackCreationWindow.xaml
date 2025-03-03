@@ -46,7 +46,7 @@
         <!--Priority-->
 
         <Label Content="Feedback Type" Grid.Column="2" FontSize="17" FontFamily="Leelawadee UI" HorizontalAlignment="Center" Margin="0,10,0,50"/>
-        <ComboBox Grid.Row="0" Grid.Column="2"  Margin="50,50,50,10" ItemsSource="{Binding Categorys}" SelectedItem="{Binding Feedback.Category, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="15" HorizontalContentAlignment="Center"/>
+        <ComboBox Grid.Row="0" Grid.Column="2"  Margin="50,50,50,10" ItemsSource="{Binding Categorys}" SelectedItem="{Binding Feedback.Type, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="15" HorizontalContentAlignment="Center"/>
         <!--Feedback Type, whether its a bug, request, or something-->
 
 
