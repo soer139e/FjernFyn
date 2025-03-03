@@ -42,17 +42,17 @@ namespace fjernfyn.Repositories
                 using (SqlCommand cmd = new SqlCommand("INSERT INTO Feedback (Priority, Title, Description, Category, CreationDate, EmployeeID, SoftwareID, ErrorCode, Image) " +
             "VALUES (@Priority, @Title, @Description, @Category, @CreationDate, @EmployeeID, @SoftwareID, @ErrorCode, @Image)", con))
                 {
-                    cmd.Parameters.AddWithValue("@Priority", feedback.Priority);
+                    cmd.Parameters.AddWithValue("@Priority", feedback.Priority.ToString());
                     cmd.Parameters.AddWithValue("@Title", feedback.Title);
                     cmd.Parameters.AddWithValue("@Description", feedback.Description);
-                    cmd.Parameters.AddWithValue("@Category", feedback.Type);
+                    cmd.Parameters.AddWithValue("@Category", feedback.Type.ToString());
                     //TODO: Databind the creation data, AKA MAKE EVERYTHING BE A DATETIME.
-                    cmd.Parameters.AddWithValue("@CreationDate", "2025-02-25"); // Use fixed dummy date as string
+                    cmd.Parameters.AddWithValue("@CreationDate", DateOnly.FromDateTime(DateTime.Now));
                     cmd.Parameters.AddWithValue("@EmployeeID", feedback.Employee.Id);
                     cmd.Parameters.AddWithValue("@SoftwareID", feedback.SoftwareProp.ID);
                     //TODO: also databind these two little fellas.
-                    cmd.Parameters.AddWithValue("@ErrorCode", "stupid");
-                    cmd.Parameters.AddWithValue("@Image", "not real");
+                    cmd.Parameters.AddWithValue("@ErrorCode", feedback.ErrorCode);
+                    cmd.Parameters.AddWithValue("@Image", feedback.Image);
 
                     cmd.ExecuteNonQuery();
                 }
