@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using fjernfyn.Classes;
+using fjernfyn.ViewModels;
 
 namespace fjernfyn.Views
 {
@@ -19,9 +21,11 @@ namespace fjernfyn.Views
     /// </summary>
     public partial class ReadInquiryWindow : Window
     {
-        public ReadInquiryWindow()
+        public Feedback Inquiry { get; set; }
+        public ReadInquiryWindow(Feedback inquiry)
         {
             InitializeComponent();
+                Inquiry = inquiry;
         }
     }
 }
