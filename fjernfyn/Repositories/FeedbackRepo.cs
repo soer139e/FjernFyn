@@ -1,7 +1,10 @@
 ﻿using fjernfyn.Classes;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Identity.Client;
+using Microsoft.Win32;
 using System.Data;
+using System.Windows;
 
 namespace fjernfyn.Repositories
 {
@@ -145,6 +148,44 @@ namespace fjernfyn.Repositories
 
                 return sortedList.ToList();
             }
+            
+        }
+        public List<Feedback> DeleteInquiry(Feedback feedback)
+        {
+            
+            if (feedback != null)
+            {
+
+                string messageBoxText = "Vil du slette forespørgsel?";
+                string caption = "Slet besked";
+                MessageBoxButton button = MessageBoxButton.YesNoCancel;
+                MessageBoxImage icon = MessageBoxImage.Warning;
+                MessageBoxResult answer;
+                answer = MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
+
+                if (answer == MessageBoxResult.Yes)
+                {
+                    using (SqlConnection con = new SqlConnection(conString))
+                    {
+                        con.Open();
+                        using (SqlCommand cmd = new SqlCommand("DELETE FROM Feedback WHERE FeedbackID = @Id"))
+                        {
+                            cmd.Parameters.AddWithValue("@id", feedback.Id);
+                            cmd.ExecuteNonQuery();
+                                
+                        }
+                    }
+                    foreach (Feedback f in feedbacks) { 
+                    if (f.Id == feedback.Id)
+                        {
+                            feedbacks.Remove(f);
+                        }
+                    }
+
+                }
+
+            }
+            return feedbacks;
         }
     }
 }

@@ -59,6 +59,8 @@ namespace fjernfyn
                 SortParametersChangedCommand.Execute(this);
             }
         }
+        public ICommand SortParametersChangedCommand { get; }
+        public ICommand DeleteInquiryCommand { get; }
         private Category _selectedCategory;
         public Category SelectedCategory
         {
@@ -83,10 +85,11 @@ namespace fjernfyn
             SortParametersChangedCommand = new CommandHandler(SortParameterSelected);
             SelectedCategory = Category.All;
             SelectedPriority = Priority.All;
+            DeleteInquiryCommand = new CommandHandler(DeleteInquiry);
             
 
         }
-        public ICommand SortParametersChangedCommand { get; }
+       
 
         public event PropertyChangedEventHandler? PropertyChanged;
         protected void OnPropertyChanged(string propertyName)
@@ -107,6 +110,18 @@ namespace fjernfyn
            {
                 Feedbacks.Add(feedback);
            }
+        }
+        public void DeleteInquiry()
+        {
+            Feedbacks.Clear();
+            ObservableCollection<Feedback> sortedFeedback = new ObservableCollection<Feedback>(feedbackRepo.DeleteInquiry(SelectedInquiry));
+           
+            foreach (Feedback f in sortedFeedback)
+            {
+                Feedbacks.Add(f);
+            }
+
+
         }
     }
 }
