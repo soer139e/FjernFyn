@@ -113,9 +113,9 @@ namespace fjernfyn
         }
         public void DeleteInquiry()
         {
-            Feedbacks.Clear();
+            
             ObservableCollection<Feedback> sortedFeedback = new ObservableCollection<Feedback>(feedbackRepo.DeleteInquiry(SelectedInquiry));
-           
+            Feedbacks.Clear();
             foreach (Feedback f in sortedFeedback)
             {
                 Feedbacks.Add(f);

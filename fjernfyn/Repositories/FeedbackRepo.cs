@@ -158,7 +158,7 @@ namespace fjernfyn.Repositories
 
                 string messageBoxText = "Vil du slette forespørgsel?";
                 string caption = "Slet besked";
-                MessageBoxButton button = MessageBoxButton.YesNoCancel;
+                MessageBoxButton button = MessageBoxButton.YesNo;
                 MessageBoxImage icon = MessageBoxImage.Warning;
                 MessageBoxResult answer;
                 answer = MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
@@ -168,23 +168,19 @@ namespace fjernfyn.Repositories
                     using (SqlConnection con = new SqlConnection(conString))
                     {
                         con.Open();
-                        using (SqlCommand cmd = new SqlCommand("DELETE FROM Feedback WHERE FeedbackID = @Id"))
+                        using (SqlCommand cmd = new SqlCommand("DELETE FROM Feedback WHERE FeedbackID = @Id",con))
                         {
                             cmd.Parameters.AddWithValue("@id", feedback.Id);
                             cmd.ExecuteNonQuery();
                                 
                         }
                     }
-                    foreach (Feedback f in feedbacks) { 
-                    if (f.Id == feedback.Id)
-                        {
-                            feedbacks.Remove(f);
-                        }
-                    }
+
 
                 }
 
             }
+            feedbacks = GetAllFeedback();
             return feedbacks;
         }
     }
