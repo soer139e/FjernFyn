@@ -7,6 +7,16 @@
         mc:Ignorable="d"
         Title="ReadInquiryWindow" Height="450" Width="800">
     <Grid>
-        <Button Name ="Slet" Width="100" Height='100'/>
+        <Button Content="Marker som udført" Name="Slet" Margin="687,386,31,18"/>
+        <Label Content="Label" HorizontalAlignment="Left" Margin="121,29,0,0" VerticalAlignment="Top"/>
+        <Label Content="Label" HorizontalAlignment="Left" Margin="362,29,0,0" VerticalAlignment="Top"/>
+        <Label Content="Label" HorizontalAlignment="Left" Margin="639,29,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Margin="121,112,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <TextBox HorizontalAlignment="Left" Margin="121,0,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Center" Width="120"/>
+        <Button Content="Tilbage" x:Name="TilbageBtn" Margin="576,386,142,18"/>
+        <Label Content="Fejlkode" HorizontalAlignment="Left" Margin="690,199,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Margin="617,258,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Titel:" HorizontalAlignment="Left" Margin="121,81,0,0" VerticalAlignment="Top"/>
+        <Label Content="Beskrivelse:" HorizontalAlignment="Left" Margin="121,177,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>
