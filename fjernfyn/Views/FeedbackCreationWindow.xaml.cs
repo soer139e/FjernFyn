@@ -19,7 +19,12 @@ namespace fjernfyn
             DataContext = viewModel;
         }
 
-       
-
+        private void tbUName_PreviewMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if(viewModel.Feedback.Title == "Titel")
+            {
+                viewModel.Feedback.Title = "";
+            }
+        }
     }
 }

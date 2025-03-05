@@ -1,12 +1,18 @@
 ﻿
+using System.ComponentModel;
 using System.Windows.Controls;
 
 namespace fjernfyn.Classes
 {
-    public class Feedback
+    public class Feedback : INotifyPropertyChanged
     {
         public int Id { get; set; }
-        public string Title { get; set; } = "Titel";
+        private string _title = "Titel";
+        public string Title
+        {
+            get { return _title; }
+            set { _title = value; OnPropertyChanged(nameof(Title)); }
+        }
         public string Description { get; set; } = "Beskrivelse af problem";
         public DateOnly CreationDate { get; set; }
         public string ErrorCode { get; set; }
@@ -25,6 +31,17 @@ namespace fjernfyn.Classes
             Employee = new Employee();
         }
 
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        protected void OnPropertyChanged(string propertyName)
+        {
+            var value = this.GetType().GetProperty(propertyName)?.GetValue(this, null);
+            PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if (propertyChanged != null)
+            {
+                propertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
 
     }
 }

@@ -17,7 +17,13 @@ namespace fjernfyn
         
         private Window feedbackWindow {  get; set; }
 
-        public Feedback Feedback { get; set; }
+        private Feedback _feedBack;
+        public Feedback Feedback
+        {
+            get { return _feedBack; }
+            set { _feedBack = value; OnPropertyChanged(nameof(Feedback)); }
+        }
+            
 
         public Employee Employee { get; set; }
 
