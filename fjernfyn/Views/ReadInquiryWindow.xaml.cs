@@ -21,11 +21,15 @@ namespace fjernfyn.Views
     /// </summary>
     public partial class ReadInquiryWindow : Window
     {
+      
+        public ReadInquiryViewModel RIVM { get; set; }
         public Feedback Inquiry { get; set; }
         public ReadInquiryWindow(Feedback inquiry)
         {
             InitializeComponent();
                 Inquiry = inquiry;
+            RIVM = new ReadInquiryViewModel();
+            DataContext = RIVM;
         }
     }
 }
