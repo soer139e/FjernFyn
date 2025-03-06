@@ -25,7 +25,7 @@ namespace fjernfyn.ViewModels
         public void SendEmail()
         {
        
-            _emailSendingService.SendEmailAsync("Soren.Ploug04@gmail.com", "test af program", "Dette er en test af EmailSendingService");
+            _emailSendingService.SendEmailAsync("epicrobloxporn@gmail.com", "test af program", "Dette er en test af EmailSendingService");
         }
     }
 }
