@@ -28,8 +28,14 @@ namespace fjernfyn.Views
         {
             InitializeComponent();
                 Inquiry = inquiry;
-            RIVM = new ReadInquiryViewModel();
+            RIVM = new ReadInquiryViewModel(inquiry);
             DataContext = RIVM;
+        }
+
+        private void Slet_Click(object sender, RoutedEventArgs e)
+        {
+            SendResponseWindow sendResponseWindow = new SendResponseWindow(RIVM.Inquiry);
+            sendResponseWindow.Show(); 
         }
     }
 }

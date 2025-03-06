@@ -19,7 +19,7 @@ namespace fjernfyn.Services
                 UseDefaultCredentials = false,
                 Credentials = new NetworkCredential("johnisdoe906@gmail.com", "klib zrby arsb shii")
             };
-
+           
             return client.SendMailAsync(new MailMessage(from: "johnisdoe906@gmail.com", to: email, subject, message));
         }
     }
