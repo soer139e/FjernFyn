@@ -4,7 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:fjernfyn.Views"
+        xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
         mc:Ignorable="d"
+        
+             
         Title="ReadInquiryWindow" Height="500" Width="800">
     <Grid>
         <Grid.Background>
@@ -37,7 +40,7 @@
         <TextBox Grid.Row="2" Grid.ColumnSpan="2" Grid.RowSpan="1" Margin="60,0,58,0" Text="{Binding Inquiry.Description}" IsReadOnly="True" AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible"/>
         <Label Grid.Row="2" Grid.Column="2" Margin="33,103,33,51" Content="Fejlkode" HorizontalAlignment="Left" FontSize="20" FontWeight="Bold"/>
 
-        <Image Source="{Binding Display}" Grid.Row="1" Grid.Column="2" Width="200" Height="200" HorizontalAlignment="Left" Margin="10,0,0,90" Grid.RowSpan="2" />
+        <Image Name="ErrorImage" Grid.Row="1" Grid.Column="2" Width="200" Height="200" HorizontalAlignment="Left" Margin="10,0,0,90" Grid.RowSpan="2" />
         
         <Label Content="{Binding Inquiry.ErrorCode}" Grid.Row="2" Grid.Column="2" Margin="33,147,33,10" FontSize="20"/>
         <Button Content="Tilbage" Grid.Column="2" Grid.Row="3" Margin="33,39,164,10" Width="70"/>
