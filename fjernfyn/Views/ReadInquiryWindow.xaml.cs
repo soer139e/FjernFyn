@@ -32,7 +32,7 @@ namespace fjernfyn.Views
                 Inquiry = inquiry;
             RIVM = new ReadInquiryViewModel(inquiry);
             DataContext = RIVM;
-            ErrorImage.Source = ConvertByteArrayToImage(Inquiry.Image);
+            ErrorImage.Source = RIVM.ConvertByteArrayToImage(Inquiry.Image);
 
 
         }
@@ -42,21 +42,7 @@ namespace fjernfyn.Views
             SendResponseWindow sendResponseWindow = new SendResponseWindow(RIVM.Inquiry);
             sendResponseWindow.Show(); 
         }
-        public BitmapImage ConvertByteArrayToImage(byte[] imageData)
-        {
-            if (imageData == null || imageData.Length == 0)
-                return null;
-
-            BitmapImage image = new BitmapImage();
-            using (MemoryStream ms = new MemoryStream(imageData))
-            {
-                image.BeginInit();
-                image.CacheOption = BitmapCacheOption.OnLoad;
-                image.StreamSource = ms;
-                image.EndInit();
-            }
-            image.Freeze(); // Prevents memory leaks in UI-bound scenarios
-            return image;
-        }
+       
+        
     }
 }
