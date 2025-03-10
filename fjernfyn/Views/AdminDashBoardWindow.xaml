@@ -33,7 +33,7 @@
                 Grid.Row="1"
                 Margin="80,80,80,80"
                 FontSize="20"
-                Command="{Binding CreateFeedbackCommand}" />
+                Command="{Binding InquiryOverViewCommand}" />
         <Button Content="Admin"
                 Grid.Column="1"
                 Grid.Row="1"
