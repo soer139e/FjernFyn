@@ -6,6 +6,15 @@ namespace fjernfyn.Classes
 {
     public class Feedback : INotifyPropertyChanged
     {
+        private bool _isMarkedAsDone = false;
+
+        public bool IsMarkedAsDone
+        {
+            get { return _isMarkedAsDone; }
+            set { _isMarkedAsDone = value; }
+
+        }
+
         public int Id { get; set; }
         private string _title = "Titel";
         public string Title

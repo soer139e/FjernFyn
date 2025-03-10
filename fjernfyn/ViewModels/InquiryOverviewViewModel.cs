@@ -17,6 +17,7 @@ namespace fjernfyn
         private FeedbackRepo feedbackRepo;
         private SoftwaresRepo softwaresRepo;
 
+        public ICommand MarkedAsDoneCommand { get; }
         public List<string> DateFilters { get; set; } = new List<string>() { "Sorter Stigende", "Sorter Faldende" };
         private string _selectedDateFilter {  get; set; }
         public string SelectedDateFilter
@@ -89,7 +90,7 @@ namespace fjernfyn
             SelectedCategory = Category.All;
             SelectedPriority = Priority.All;
             DeleteInquiryCommand = new CommandHandler(DeleteInquiry);
-            
+            MarkedAsDoneCommand = new CommandHandler(MarkedAsDone);
 
         }
        
@@ -102,6 +103,18 @@ namespace fjernfyn
             if (propertyChanged != null)
             {
                 propertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
+        public void MarkedAsDone()
+        {
+
+            ObservableCollection<Feedback> sortedFeedback = new ObservableCollection<Feedback>(feedbackRepo.MarkAsDone(SelectedInquiry));
+            Feedbacks.Clear();
+
+            foreach (Feedback feedback in sortedFeedback)
+            {
+                Feedbacks.Add(feedback);
             }
         }
         public void SortParameterSelected()

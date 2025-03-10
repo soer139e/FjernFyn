@@ -69,7 +69,7 @@ namespace fjernfyn.Repositories
                 con.Open();
                 //Gets all feedbacks in database as well as the connected Employee and Software.
                 using (SqlCommand cmd = new SqlCommand("SELECT * FROM FEEDBACK JOIN EMPLOYEES ON (EmployeeID = ID) JOIN Software " +
-                    "ON (SoftwareID = Software.ID)", con))
+                    "ON (SoftwareID = Software.ID) WHERE IsMarkedAsDone = 0", con))
                 {
                     using (SqlDataReader dr = cmd.ExecuteReader())
                     {
@@ -88,15 +88,15 @@ namespace fjernfyn.Repositories
                                 ErrorCode = dr.GetString(8),
                                 Image = dr.IsDBNull(9) ? null : (byte[])dr[9]
                             };
-                            feedback.Employee.Username = dr.GetString(11);
-                            if (!dr.IsDBNull(11))
-                                feedback.Employee.Username = dr.GetString(11);
+                            feedback.Employee.Username = dr.GetString(12);
+                            if (!dr.IsDBNull(12))
+                                feedback.Employee.Username = dr.GetString(12);
 
-                            feedback.Employee.Department = (Department)Enum.Parse(typeof(Department), dr.GetString(14));
-                            feedback.Employee.FullName = dr.GetString(15);
+                            feedback.Employee.Department = (Department)Enum.Parse(typeof(Department), dr.GetString(15));
+                            feedback.Employee.FullName = dr.GetString(16);
 
                             feedback.SoftwareProp.ID = dr.GetInt32(4);
-                            feedback.SoftwareProp.Name = dr.GetString(17);
+                            feedback.SoftwareProp.Name = dr.GetString(18);
 
                             feedbacks.Add(feedback);
                         }
@@ -106,83 +106,113 @@ namespace fjernfyn.Repositories
             return feedbacks;
         }
 
-        public List<Feedback> SortInquirys (Software? software =null,Category? category = null, Priority? priority = null, string? DateFilter = null)
+        public List<Feedback> SortInquirys(Software? software = null, Category? category = null, Priority? priority = null, string? DateFilter = null)
         {
+
+            var sortedList = feedbacks.AsQueryable();
+
+            if (category != null)
             {
-                var sortedList = feedbacks.AsQueryable();
-
-                if (category != null)
+                if (category != Category.All)
                 {
-                    if (category!= Category.All) {
-                        sortedList = sortedList.Where(f => f.Type == category.Value);
-                        //sortedList = sortedList.Where(f => f.Type != null && f.Type.Equals(category.Value));
-                    }
+                    sortedList = sortedList.Where(f => f.Type == category.Value);
+                    //sortedList = sortedList.Where(f => f.Type != null && f.Type.Equals(category.Value));
                 }
-
-                if (priority != null)
-                {
-                    if (priority != Priority.All)
-                    {
-                        sortedList = sortedList.Where(f => f.Priority == priority.Value);
-                        //sortedList = sortedList.Where(f=> f.Priority != null &&  f.Priority.Equals(priority.Value));
-                    }
-                }
-                     
-                if (software != null)
-                {
-                    if (software.Name != "All") {
-                        sortedList = sortedList.Where(f => f.SoftwareProp.Name == software.Name);
-                    }
-                }
-                if (DateFilter != null)
-                {
-                    if (DateFilter == "Sorter Stigende")
-                    {
-                        sortedList = sortedList.OrderBy(f => f.CreationDate);
-                    }
-                    if(DateFilter == "Sorter Faldende")
-                    {
-                        sortedList = sortedList.OrderByDescending(f => f.CreationDate);
-                    }
-                }
-
-                return sortedList.ToList();
             }
-            
+
+            if (priority != null)
+            {
+                if (priority != Priority.All)
+                {
+                    sortedList = sortedList.Where(f => f.Priority == priority.Value);
+                    //sortedList = sortedList.Where(f=> f.Priority != null &&  f.Priority.Equals(priority.Value));
+                }
+            }
+
+            if (software != null)
+            {
+                if (software.Name != "All")
+                {
+                    sortedList = sortedList.Where(f => f.SoftwareProp.Name == software.Name);
+                }
+            }
+            if (DateFilter != null)
+            {
+                if (DateFilter == "Sorter Stigende")
+                {
+                    sortedList = sortedList.OrderBy(f => f.CreationDate);
+                }
+                if (DateFilter == "Sorter Faldende")
+                {
+                    sortedList = sortedList.OrderByDescending(f => f.CreationDate);
+                }
+            }
+
+            return sortedList.ToList();
         }
+
         public List<Feedback> DeleteInquiry(Feedback feedback)
         {
-            
-            if (feedback != null)
+            try
             {
-
-                string messageBoxText = "Vil du slette forespørgsel?";
-                string caption = "Slet besked";
-                MessageBoxButton button = MessageBoxButton.YesNo;
-                MessageBoxImage icon = MessageBoxImage.Warning;
-                MessageBoxResult answer;
-                answer = MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
-
-                if (answer == MessageBoxResult.Yes)
+                if (feedback != null)
                 {
-                    using (SqlConnection con = new SqlConnection(conString))
+
+                    string messageBoxText = "Vil du slette forespørgsel?";
+                    string caption = "Slet besked";
+                    MessageBoxButton button = MessageBoxButton.YesNo;
+                    MessageBoxImage icon = MessageBoxImage.Warning;
+                    MessageBoxResult answer;
+                    answer = MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
+
+                    if (answer == MessageBoxResult.Yes)
                     {
-                        con.Open();
-                        using (SqlCommand cmd = new SqlCommand("DELETE FROM Feedback WHERE FeedbackID = @Id",con))
+                        using (SqlConnection con = new SqlConnection(conString))
                         {
-                            cmd.Parameters.AddWithValue("@id", feedback.Id);
-                            cmd.ExecuteNonQuery();
-                                
+                            con.Open();
+                            using (SqlCommand cmd = new SqlCommand("DELETE FROM Feedback WHERE FeedbackID = @Id", con))
+                            {
+                                cmd.Parameters.AddWithValue("@id", feedback.Id);
+                                cmd.ExecuteNonQuery();
+
+                            }
                         }
+
+
                     }
 
-
                 }
-
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
             feedbacks = GetAllFeedback();
             return feedbacks;
         }
- 
+
+        public List<Feedback> MarkAsDone(Feedback feedback)
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(conString))
+                {
+                    con.Open();
+                    using (SqlCommand cmd = new SqlCommand("UPDATE Feedback SET IsMarkedAsDone = 1 WHERE FeedbackID = @Id", con))
+                    {
+                        cmd.Parameters.AddWithValue("@Id", feedback.Id);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+            feedbacks = GetAllFeedback();
+            return feedbacks;
+        }
+
     }
 }
