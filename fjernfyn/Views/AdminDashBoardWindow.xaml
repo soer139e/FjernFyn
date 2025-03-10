@@ -28,7 +28,7 @@
                 Margin="80,80,80,80"
                 FontSize="20"
                 Command="{Binding CreateFeedbackCommand}" />
-        <Button Content="Udførte Forespørgsler"
+        <Button   Content="Udførte Forespørgsler"
                 Grid.Column="0"
                 Grid.Row="1"
                 Margin="80,80,80,80"

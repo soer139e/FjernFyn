@@ -7,8 +7,9 @@
         mc:Ignorable="d"
         Title="FFFeedback" Height="500" Width="800"
         DataContext="{Binding viewModel}">
-
+   
     <Grid>
+        
         <Grid.Background>
             <ImageBrush ImageSource="../Assets/icons/bgicon.png" Stretch="Uniform" Opacity="0.25"/>
         </Grid.Background>
