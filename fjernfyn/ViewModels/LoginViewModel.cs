@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
+using fjernfyn.Views;
 
 namespace fjernfyn
 {
@@ -45,17 +46,26 @@ namespace fjernfyn
         {
             if (empRepo.HandleInformation(Employee))
             {
-                nextWindow = new FeedbackCreationWindow(this.Employee);
-                nextWindow.Show();
+                if (Employee.Department == Department.Administration)
+                {
+                    var adminWindow = new AdminDashBoardWindow(this.Employee);
+                    adminWindow.Show();
+                }
+                else
+                {
+                    nextWindow = new FeedbackCreationWindow(this.Employee);
+                    nextWindow.Show();
+                    MessageBox.Show($"Velkommen: {Employee.FullName} ({Employee.Email})\n\n\nHusk at være grundig i din feedback.", "Logget ind");
+                }
                 Window.Close();
-                MessageBox.Show($"Velkommen: {Employee.FullName} ({Employee.Email})\n\n\nHusk at være grundig i din feedback.", "Logget ind");
+                
             }
             else
             {
                 MessageBox.Show("Der skete en fejl under login.", "Fejl");
-
             }
         }
+
 
 
         protected void OnPropertyChanged(string propertyName)
