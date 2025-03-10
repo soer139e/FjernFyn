@@ -7,6 +7,38 @@
         mc:Ignorable="d"
         Title="AdminDashBoardWindow" Height="450" Width="800">
     <Grid>
-        <TextBox Text="You are ADMIN" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40" />
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Button Content="Opret Forespørgsel"
+                Grid.Column="0"
+                Grid.Row="0"
+                Margin="80,80,80,80"
+                FontSize="20"
+                Command="{Binding CreateFeedbackCommand}" />
+        <Button Content="Vis Forespørgsel"
+                Grid.Column="1"
+                Grid.Row="0"
+                Margin="80,80,80,80"
+                FontSize="20"
+                Command="{Binding CreateFeedbackCommand}" />
+        <Button Content="Udførte Forespørgsler"
+                Grid.Column="0"
+                Grid.Row="1"
+                Margin="80,80,80,80"
+                FontSize="20"
+                Command="{Binding CreateFeedbackCommand}" />
+        <Button Content="Admin"
+                Grid.Column="1"
+                Grid.Row="1"
+                Margin="80,80,80,80"
+                FontSize="20"
+                Command="{Binding CreateFeedbackCommand}" />
     </Grid>
 </Window>
