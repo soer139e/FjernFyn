@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using fjernfyn.Classes;
+using fjernfyn.ViewModels;
+
 
 namespace fjernfyn.Views
 {
@@ -19,9 +23,26 @@ namespace fjernfyn.Views
     /// </summary>
     public partial class ReadInquiryWindow : Window
     {
-        public ReadInquiryWindow()
+      
+        public ReadInquiryViewModel RIVM { get; set; }
+        public Feedback Inquiry { get; set; }
+        public ReadInquiryWindow(Feedback inquiry)
         {
             InitializeComponent();
+                Inquiry = inquiry;
+            RIVM = new ReadInquiryViewModel(inquiry);
+            DataContext = RIVM;
+            ErrorImage.Source = RIVM.ConvertByteArrayToImage(Inquiry.Image);
+
+
         }
+
+        private void Slet_Click(object sender, RoutedEventArgs e)
+        {
+            SendResponseWindow sendResponseWindow = new SendResponseWindow(RIVM.Inquiry);
+            sendResponseWindow.Show(); 
+        }
+       
+        
     }
 }

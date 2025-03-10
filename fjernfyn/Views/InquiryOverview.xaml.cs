@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
 namespace fjernfyn.Views
 {
     /// <summary>
@@ -29,6 +30,18 @@ namespace fjernfyn.Views
 
         }
 
-
+        // metoden fort at åbne en forespørgsel, laves i code behind da der ikke findes en god måde at overholde mvvvm på, så det er ok i  følge en anden gruppe der fik hjælp af leif
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (iovm.SelectedInquiry != null)
+            {
+                ReadInquiryWindow readWindow = new ReadInquiryWindow(iovm.SelectedInquiry);
+                readWindow.Show();
+            }
+            else
+            {
+                MessageBox.Show("Ingen Forespørgsel Valgt.","Fejl",MessageBoxButton.OK,MessageBoxImage.Error);
+            }
+        }
     }
 }

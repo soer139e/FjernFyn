@@ -61,6 +61,9 @@ namespace fjernfyn
         }
         public ICommand SortParametersChangedCommand { get; }
         public ICommand DeleteInquiryCommand { get; }
+    
+       
+
         private Category _selectedCategory;
         public Category SelectedCategory
         {
