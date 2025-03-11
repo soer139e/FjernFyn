@@ -123,7 +123,7 @@ namespace fjernfyn.Repositories
 
             if (priority != null)
             {
-                if (priority != Priority.All)
+                if (priority != Priority.All) // Erm what the sigma do you mean by .all? imma need you to explain that to me when im back, chief.
                 {
                     sortedList = sortedList.Where(f => f.Priority == priority.Value);
                     //sortedList = sortedList.Where(f=> f.Priority != null &&  f.Priority.Equals(priority.Value));
