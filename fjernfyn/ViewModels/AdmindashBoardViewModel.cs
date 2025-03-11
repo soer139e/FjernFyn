@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using fjernfyn.Windows;
 
 namespace fjernfyn.ViewModels
 {
@@ -29,32 +30,29 @@ namespace fjernfyn.ViewModels
         public void CreateFeedbackClicked()
         {
 
-            //Window.Hide();
-            //CreateFeedbackWindow createFeedbackWindow = new CreateFeedbackWindow(employee);
-            //createFeedbackWindow.Show();
+            
+            FeedbackCreationWindow createFeedbackWindow = new FeedbackCreationWindow(employee);
+            createFeedbackWindow.Show();
+            Window.Close();
         }
 
         public void ShowFeedbackClicked()
         {
 
-            //Window.Hide();
-            //InquiryOverviewWindow inquiryOverviewWindow = new InquiryOverviewWindow(employee);
-            //inquiryOverviewWindow.Show();
+         
+            InquiryOverview inquiryOverviewWindow = new InquiryOverview();
+            inquiryOverviewWindow.Show();
+            Window.Close();
         }
 
         public void ShowMarkedDoneClicked()
         {
 
-            //Window.Hide();
-            //MarkedDoneWindow markedDoneWindow = new MarkedDoneWindow(employee);
-            //markedDoneWindow.Show();
         }
 
         public void AdminPanelClicked()
         {
-            //Window.Hide();
-            //AdminPanelWindow adminPanelWindow = new AdminPanelWindow(employee);
-            //adminPanelWindow.Show();
+
         }
     }
 }
