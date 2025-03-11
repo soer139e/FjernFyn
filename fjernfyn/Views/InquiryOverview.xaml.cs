@@ -20,7 +20,7 @@ namespace fjernfyn.Views
     /// <summary>
     /// Interaction logic for InquiryOverview.xaml
     /// </summary>
-    public partial class InquiryOverview : Page
+    public partial class InquiryOverview : Window
     {
         public InquiryOverviewViewModel iovm = new InquiryOverviewViewModel();
         public InquiryOverview()

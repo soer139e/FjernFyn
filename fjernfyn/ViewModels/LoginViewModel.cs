@@ -1,4 +1,5 @@
 ﻿using fjernfyn.Repositories;
+using fjernfyn.Views;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
@@ -54,6 +55,9 @@ namespace fjernfyn
                 }
                 else
                 {
+                    AdminDashBoardWindow adminDashBoardWindow = new AdminDashBoardWindow(Employee);
+                    adminDashBoardWindow.Show();
+                    Window.Close();
 
                 }
             }

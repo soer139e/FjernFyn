@@ -22,11 +22,12 @@ namespace fjernfyn.Views
     {
         private Employee _employee { get; set; }
         public AdmindashBoardViewModel adbvw { get; set; }
- 
+
         public AdminDashBoardWindow(Employee employee)
         {
             InitializeComponent();
             adbvw = new AdmindashBoardViewModel(this, _employee);
+            DataContext = adbvw;
             _employee = employee;
         }
     }

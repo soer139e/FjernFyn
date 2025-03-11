@@ -1,5 +1,5 @@
 ﻿
-    <Page x:Class="fjernfyn.Views.InquiryOverview"
+    <Window x:Class="fjernfyn.Views.InquiryOverview"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -9,8 +9,7 @@
       xmlns:sys="clr-namespace:System;assembly=mscorlib"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="InquiryOverview"
-      ShowsNavigationUI="False">
+      Title="InquiryOverview">
       
     <Grid>
         <Grid.RowDefinitions>
@@ -74,4 +73,4 @@
 
     </Grid>
 
-</Page>
+</Window>
