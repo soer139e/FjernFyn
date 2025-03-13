@@ -9,7 +9,7 @@ using System.Windows;
 using System.Windows.Input;
 using fjernfyn.Classes;
 using fjernfyn.Interfaces;
-using fjernfyn.Models;
+
 using fjernfyn.Services;
 
 
@@ -21,9 +21,15 @@ namespace fjernfyn
 
         private readonly IEmailSender _emailSendingService;
 
-        public Mail Mail { get; set; }
-        
-        
+        private string body;
+
+        public string Body
+        {
+            get { return body; }
+            set { body = value; }
+        }
+
+
         private string _title;     
 
         public string Title
@@ -36,7 +42,7 @@ namespace fjernfyn
         public ICommand SendEmailCommand { get; }
         public SendResponseViewModel(Feedback inquiry)
         {
-            Mail = new Mail() {Reciver = inquiry.Employee.Email};
+            
             _inquiryToRespond = inquiry;
             _emailSendingService = new EmailSendingService();
 
@@ -48,7 +54,7 @@ namespace fjernfyn
             {
                 try
                 {
-                    _emailSendingService.SendEmailAsync(Mail.Reciver, Mail.Subject, Mail.Body);
+                    _emailSendingService.SendEmailAsync(_inquiryToRespond.Employee.Email, Title, Body);
                 }
                 catch {
                     MessageBox.Show("Ugyldig mail", "Fejl", MessageBoxButton.OK, MessageBoxImage.Error);
