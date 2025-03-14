@@ -11,17 +11,17 @@ namespace fjernfyn
     public class FeedbackCreateViewModel : INotifyPropertyChanged
     {
         public List<Software> softwares { get; set; }
-        private FeedbackRepo feedbackRepo;
+        private InquiryRepo _inquiryRepo;
         private SoftwaresRepo softwareRepo { get; set; }
 
         
         private Window feedbackWindow {  get; set; }
 
-        private Feedback _feedBack;
-        public Feedback Feedback
+        private Inquiry _inquiry;
+        public Inquiry Inquiry
         {
-            get { return _feedBack; }
-            set { _feedBack = value; OnPropertyChanged(nameof(Feedback)); }
+            get { return _inquiry; }
+            set { Inquiry = value; OnPropertyChanged(nameof(Inquiry)); }
         }
             
 
@@ -66,7 +66,7 @@ namespace fjernfyn
         /// </summary>
         public FeedbackCreateViewModel(Window window, Employee emp) 
         {
-            feedbackRepo = new FeedbackRepo();
+            _inquiryRepo = new InquiryRepo();
 
             softwareRepo = new SoftwaresRepo();
             softwares = new List<Software>();
@@ -81,10 +81,10 @@ namespace fjernfyn
 
             // In my personal opinion, going with option A, not only gives us consistency throughout the code,
             // but is also objectively the better option if we want to not go insane writing this mess.
-            Feedback = new Feedback();
-            Feedback.Description = "Hvad prøver du at gøre?\n \r\nTrin-for-trin gengivelse\r\n \nHvad gjorde du, før problemet opstod:";
+            Inquiry = new Inquiry();
+            Inquiry.Description = "Hvad prøver du at gøre?\n \r\nTrin-for-trin gengivelse\r\n \nHvad gjorde du, før problemet opstod:";
 
-            Feedback.ErrorCode = "";
+            Inquiry.ErrorCode = "";
             feedbackWindow = window;
             Employee = emp;
         } 
@@ -109,9 +109,9 @@ namespace fjernfyn
             //Feedback.SoftwareProp = software;
 
 
-            Feedback.Employee = Employee;
+           Inquiry.Employee = Employee;
           
-            feedbackRepo.CreateFeedback(Feedback);
+            _inquiryRepo.CreateFeedback(Inquiry);
            
             MessageBox.Show("Forespørgsel oprettet", "success");
         }
@@ -125,7 +125,7 @@ namespace fjernfyn
                 result = Dialog.FileName;
                 if (!string.IsNullOrEmpty(result) && File.Exists(result))
                 {
-                    Feedback.Image = File.ReadAllBytes(result);
+                    Inquiry.Image = File.ReadAllBytes(result);
                 }
 
             }

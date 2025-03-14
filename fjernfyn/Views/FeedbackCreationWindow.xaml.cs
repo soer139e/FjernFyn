@@ -21,9 +21,9 @@ namespace fjernfyn
 
         private void tbUName_PreviewMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            if(viewModel.Feedback.Title == "Titel")
+            if(viewModel.Inquiry.Title == "Titel")
             {
-                viewModel.Feedback.Title = "";
+                viewModel.Inquiry.Title = "";
             }
         }
     }
