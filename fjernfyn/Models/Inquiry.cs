@@ -4,7 +4,7 @@ using System.Windows.Controls;
 
 namespace fjernfyn.Classes
 {
-    public class Feedback : INotifyPropertyChanged
+    public class Inquiry : INotifyPropertyChanged
     {
         private bool _isMarkedAsDone = false;
 
@@ -34,7 +34,7 @@ namespace fjernfyn.Classes
 
         public byte[] Image { get; set; }
 
-        public Feedback()
+        public Inquiry()
         {
             SoftwareProp = new Software();
             Employee = new Employee();

@@ -21,7 +21,7 @@ namespace fjernfyn.Views
     public partial class SendResponseWindow : Window
     {
         SendResponseViewModel SRVM { get; set; }
-        public SendResponseWindow(Feedback inquiry)
+        public SendResponseWindow(Inquiry inquiry)
         {
             InitializeComponent();
             SRVM = new  SendResponseViewModel(inquiry);

@@ -16,8 +16,8 @@ namespace fjernfyn.ViewModels
     public class ReadInquiryViewModel
     {
 
-        public Feedback Inquiry { get; set; }
-        public ReadInquiryViewModel(Feedback inquiry)
+        public Inquiry Inquiry { get; set; }
+        public ReadInquiryViewModel(Inquiry inquiry)
         {
             Inquiry = inquiry;
 

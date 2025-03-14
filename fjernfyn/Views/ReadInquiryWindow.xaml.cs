@@ -25,8 +25,8 @@ namespace fjernfyn.Views
     {
       
         public ReadInquiryViewModel RIVM { get; set; }
-        public Feedback Inquiry { get; set; }
-        public ReadInquiryWindow(Feedback inquiry)
+        public Inquiry Inquiry { get; set; }
+        public ReadInquiryWindow(Inquiry inquiry)
         {
             InitializeComponent();
                 Inquiry = inquiry;

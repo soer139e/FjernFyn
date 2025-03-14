@@ -30,7 +30,7 @@ namespace fjernfyn.Views
 
         }
 
-        // metoden fort at åbne en forespørgsel, laves i code behind da der ikke findes en god måde at overholde mvvvm på, så det er ok i  følge en anden gruppe der fik hjælp af leif
+        
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             if (iovm.SelectedInquiry != null)

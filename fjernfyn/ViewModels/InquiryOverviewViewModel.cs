@@ -13,8 +13,8 @@ namespace fjernfyn
 {
     public class InquiryOverviewViewModel : INotifyPropertyChanged
     {
-        public ObservableCollection <Feedback> Feedbacks { get; set; }
-        private FeedbackRepo feedbackRepo;
+        public ObservableCollection <Inquiry> Inquirys { get; set; }
+        private InquiryRepo inquiryRepo;
         private SoftwaresRepo softwaresRepo;
 
         public ICommand MarkedAsDoneCommand { get; }
@@ -28,8 +28,8 @@ namespace fjernfyn
             }
         }
 
-        private Feedback _selectedInquiry { get; set; } 
-        public Feedback SelectedInquiry
+        private Inquiry _selectedInquiry { get; set; } 
+        public Inquiry SelectedInquiry
         {
             get { return _selectedInquiry; }
             set { _selectedInquiry = value; OnPropertyChanged(nameof(SelectedInquiry)); }
@@ -81,11 +81,11 @@ namespace fjernfyn
         public InquiryOverviewViewModel()
         {
             
-            feedbackRepo = new FeedbackRepo();
+            inquiryRepo = new InquiryRepo();
             Softwares = new List<Software>();
             softwaresRepo = new SoftwaresRepo();
             Softwares = softwaresRepo.GetAll();
-            Feedbacks = new ObservableCollection<Feedback>(feedbackRepo.GetAllFeedback());
+            Inquirys = new ObservableCollection<Inquiry>(inquiryRepo.GetAllInquirys());
             SortParametersChangedCommand = new CommandHandler(SortParameterSelected);
             SelectedCategory = Category.All;
             SelectedPriority = Priority.All;
@@ -109,32 +109,32 @@ namespace fjernfyn
         public void MarkedAsDone()
         {
 
-            ObservableCollection<Feedback> sortedFeedback = new ObservableCollection<Feedback>(feedbackRepo.MarkAsDone(SelectedInquiry));
-            Feedbacks.Clear();
+            ObservableCollection<Inquiry> sortedInquirys = new ObservableCollection<Inquiry>(inquiryRepo.MarkAsDone(SelectedInquiry));
+            Inquirys.Clear();
 
-            foreach (Feedback feedback in sortedFeedback)
+            foreach (Inquiry inquiry in sortedInquirys)
             {
-                Feedbacks.Add(feedback);
+                Inquirys.Add(inquiry);
             }
         }
         public void SortParameterSelected()
         {
-            ObservableCollection< Feedback > sortedFeedback = new ObservableCollection<Feedback>(feedbackRepo.SortInquirys(SelectedSoftware, SelectedCategory, SelectedPriority,SelectedDateFilter));
-            Feedbacks.Clear();
+            ObservableCollection< Inquiry > sortedInquirys = new ObservableCollection<Inquiry>( inquiryRepo.SortInquirys(SelectedSoftware, SelectedCategory, SelectedPriority,SelectedDateFilter));
+            Inquirys.Clear();
             
-           foreach(Feedback feedback in sortedFeedback)
+           foreach(Inquiry inquiry in sortedInquirys)
            {
-                Feedbacks.Add(feedback);
+                Inquirys.Add(inquiry);
            }
         }
         public void DeleteInquiry()
         {
             
-            ObservableCollection<Feedback> sortedFeedback = new ObservableCollection<Feedback>(feedbackRepo.DeleteInquiry(SelectedInquiry));
-            Feedbacks.Clear();
-            foreach (Feedback f in sortedFeedback)
+            ObservableCollection<Inquiry> sortedInquirys = new ObservableCollection<Inquiry>(inquiryRepo.DeleteInquiry(SelectedInquiry));
+            Inquirys.Clear();
+            foreach (Inquiry i in sortedInquirys)
             {
-                Feedbacks.Add(f);
+                Inquirys.Add(i);
             }
 
 

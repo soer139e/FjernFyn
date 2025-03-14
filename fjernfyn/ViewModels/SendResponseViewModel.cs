@@ -17,7 +17,7 @@ namespace fjernfyn
 {
     public class SendResponseViewModel
     {
-        private Feedback _inquiryToRespond;
+        private Inquiry _inquiryToRespond;
 
         private readonly IEmailSender _emailSendingService;
 
@@ -40,7 +40,7 @@ namespace fjernfyn
 
 
         public ICommand SendEmailCommand { get; }
-        public SendResponseViewModel(Feedback inquiry)
+        public SendResponseViewModel(Inquiry inquiry)
         {
             
             _inquiryToRespond = inquiry;
