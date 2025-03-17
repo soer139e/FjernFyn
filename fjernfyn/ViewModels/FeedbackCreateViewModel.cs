@@ -15,7 +15,7 @@ namespace fjernfyn
         private SoftwaresRepo _softwareRepo;
 
         
-        private Window feedbackWindow;
+        private Window _feedbackWindow;
 
         private Inquiry _inquiry;
         public Inquiry Inquiry
@@ -85,7 +85,7 @@ namespace fjernfyn
             Inquiry.Description = "Hvad prøver du at gøre?\n \r\nTrin-for-trin gengivelse\r\n \nHvad gjorde du, før problemet opstod:";
 
             Inquiry.ErrorCode = "";
-            feedbackWindow = window;
+            _feedbackWindow = window;
             Employee = emp;
         } 
         
