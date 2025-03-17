@@ -12,7 +12,7 @@ namespace fjernfyn
     {
         public List<Software> softwares { get; set; }
         private InquiryRepo _inquiryRepo;
-        private SoftwaresRepo softwareRepo { get; set; }
+        private SoftwaresRepo softwareRepo;
 
         
         private Window feedbackWindow {  get; set; }
