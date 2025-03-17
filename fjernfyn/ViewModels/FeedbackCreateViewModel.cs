@@ -15,7 +15,7 @@ namespace fjernfyn
         private SoftwaresRepo _softwareRepo;
 
         
-        private Window feedbackWindow {  get; set; }
+        private Window feedbackWindow;
 
         private Inquiry _inquiry;
         public Inquiry Inquiry
