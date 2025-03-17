@@ -10,9 +10,9 @@ namespace fjernfyn
 {
     public class FeedbackCreateViewModel : INotifyPropertyChanged
     {
-        public List<Software> softwares { get; set; }
+        public List<Software> Softwares { get; set; }
         private InquiryRepo _inquiryRepo;
-        private SoftwaresRepo softwareRepo;
+        private SoftwaresRepo _softwareRepo;
 
         
         private Window feedbackWindow {  get; set; }
@@ -68,11 +68,11 @@ namespace fjernfyn
         {
             _inquiryRepo = new InquiryRepo();
 
-            softwareRepo = new SoftwaresRepo();
-            softwares = new List<Software>();
+            _softwareRepo = new SoftwaresRepo();
+            Softwares = new List<Software>();
 
             AddErrorImageCommand = new CommandHandler(AddErrorImage);
-            softwares = softwareRepo.GetAll();
+            Softwares = softwareRepo.GetAll();
             sendCommand = new CommandHandler(SendClicked);
             //addSoftwareCommand = new CommandHandler(PlusClicked);
             //TODO: We need to either
