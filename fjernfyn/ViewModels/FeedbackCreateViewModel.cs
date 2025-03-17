@@ -75,12 +75,7 @@ namespace fjernfyn
             Softwares = softwareRepo.GetAll();
             sendCommand = new CommandHandler(SendClicked);
             //addSoftwareCommand = new CommandHandler(PlusClicked);
-            //TODO: We need to either
-            // A. remove the explicit Feedback constructor
-            // B. somehow gather all the information already premade here...
-
-            // In my personal opinion, going with option A, not only gives us consistency throughout the code,
-            // but is also objectively the better option if we want to not go insane writing this mess.
+           
             Inquiry = new Inquiry();
             Inquiry.Description = "Hvad prøver du at gøre?\n \r\nTrin-for-trin gengivelse\r\n \nHvad gjorde du, før problemet opstod:";
 
@@ -99,9 +94,7 @@ namespace fjernfyn
         public void SendClicked()
         {
             //Create feedback method isnt done yet.
-            //TODO: DATABIND A SELECTED SOFTWARE AND OTHER DROP BOXES
-            // Also.... maybe change the variable name
-            // THESE ARE DUMMY VALUES! I BEG YOU!!!!
+            
            
             //Software software = new Software();
             //software.Name = "Trello";
