@@ -27,7 +27,7 @@ namespace fjernfyn
 
         public Employee Employee { get; set; }
 
-        public ICommand sendCommand { get; }
+        public ICommand SendCommand { get; }
         //public ICommand addSoftwareCommand { get; }
         public ICommand AddErrorImageCommand { get; }
 
@@ -73,7 +73,7 @@ namespace fjernfyn
 
             AddErrorImageCommand = new CommandHandler(AddErrorImage);
             Softwares = softwareRepo.GetAll();
-            sendCommand = new CommandHandler(SendClicked);
+            SendCommand = new CommandHandler(SendClicked);
             //addSoftwareCommand = new CommandHandler(PlusClicked);
             //TODO: We need to either
             // A. remove the explicit Feedback constructor
