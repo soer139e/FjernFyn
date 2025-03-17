@@ -14,8 +14,8 @@ namespace fjernfyn
     public class InquiryOverviewViewModel : INotifyPropertyChanged
     {
         public ObservableCollection <Inquiry> Inquirys { get; set; }
-        private InquiryRepo inquiryRepo;
-        private SoftwaresRepo softwaresRepo;
+        private InquiryRepo _inquiryRepo;
+        private SoftwaresRepo _softwaresRepo;
 
         public ICommand MarkedAsDoneCommand { get; }
         public List<string> DateFilters { get; set; } = new List<string>() { "Sorter Stigende", "Sorter Faldende" };
@@ -81,11 +81,11 @@ namespace fjernfyn
         public InquiryOverviewViewModel()
         {
             
-            inquiryRepo = new InquiryRepo();
+            _inquiryRepo = new InquiryRepo();
             Softwares = new List<Software>();
-            softwaresRepo = new SoftwaresRepo();
-            Softwares = softwaresRepo.GetAll();
-            Inquirys = new ObservableCollection<Inquiry>(inquiryRepo.GetAllInquirys());
+            _softwaresRepo = new SoftwaresRepo();
+            Softwares = _softwaresRepo.GetAll();
+            Inquirys = new ObservableCollection<Inquiry>(_inquiryRepo.GetAllInquirys());
             SortParametersChangedCommand = new CommandHandler(SortParameterSelected);
             SelectedCategory = Category.All;
             SelectedPriority = Priority.All;
@@ -109,7 +109,7 @@ namespace fjernfyn
         public void MarkedAsDone()
         {
 
-            ObservableCollection<Inquiry> sortedInquirys = new ObservableCollection<Inquiry>(inquiryRepo.MarkAsDone(SelectedInquiry));
+            ObservableCollection<Inquiry> sortedInquirys = new ObservableCollection<Inquiry>(_inquiryRepo.MarkAsDone(SelectedInquiry));
             Inquirys.Clear();
 
             foreach (Inquiry inquiry in sortedInquirys)
@@ -119,7 +119,7 @@ namespace fjernfyn
         }
         public void SortParameterSelected()
         {
-            ObservableCollection< Inquiry > sortedInquirys = new ObservableCollection<Inquiry>( inquiryRepo.SortInquirys(SelectedSoftware, SelectedCategory, SelectedPriority,SelectedDateFilter));
+            ObservableCollection< Inquiry > sortedInquirys = new ObservableCollection<Inquiry>( _inquiryRepo.SortInquirys(SelectedSoftware, SelectedCategory, SelectedPriority,SelectedDateFilter));
             Inquirys.Clear();
             
            foreach(Inquiry inquiry in sortedInquirys)
@@ -130,7 +130,7 @@ namespace fjernfyn
         public void DeleteInquiry()
         {
             
-            ObservableCollection<Inquiry> sortedInquirys = new ObservableCollection<Inquiry>(inquiryRepo.DeleteInquiry(SelectedInquiry));
+            ObservableCollection<Inquiry> sortedInquirys = new ObservableCollection<Inquiry>(_inquiryRepo.DeleteInquiry(SelectedInquiry));
             Inquirys.Clear();
             foreach (Inquiry i in sortedInquirys)
             {
