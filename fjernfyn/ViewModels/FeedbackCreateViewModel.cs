@@ -21,7 +21,7 @@ namespace fjernfyn
         public Inquiry Inquiry
         {
             get { return _inquiry; }
-            set { Inquiry = value; OnPropertyChanged(nameof(Inquiry)); }
+            set { _inquiry = value; OnPropertyChanged(nameof(Inquiry)); }
         }
             
 
@@ -72,7 +72,7 @@ namespace fjernfyn
             Softwares = new List<Software>();
 
             AddErrorImageCommand = new CommandHandler(AddErrorImage);
-            Softwares = softwareRepo.GetAll();
+            Softwares = _softwareRepo.GetAll();
             sendCommand = new CommandHandler(SendClicked);
             //addSoftwareCommand = new CommandHandler(PlusClicked);
            

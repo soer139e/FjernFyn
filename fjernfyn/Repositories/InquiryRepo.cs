@@ -39,8 +39,8 @@ namespace fjernfyn.Repositories
                 }
 
 
-                using (SqlCommand cmd = new SqlCommand("INSERT INTO Feedback (Priority, Title, Description, Category, CreationDate, EmployeeID, SoftwareID, ErrorCode, Image) " +
-            "VALUES (@Priority, @Title, @Description, @Category, @CreationDate, @EmployeeID, @SoftwareID, @ErrorCode, @Image)", con))
+                using (SqlCommand cmd = new SqlCommand("INSERT INTO Feedback (Priority, Title, Description, Category, CreationDate, EmployeeID, SoftwareID, ErrorCode, Image , IsMarkedAsDone) " +
+            "VALUES (@Priority, @Title, @Description, @Category, @CreationDate, @EmployeeID, @SoftwareID, @ErrorCode, @Image, @Done)", con))
                 {
                     cmd.Parameters.AddWithValue("@Priority", inquiry.Priority.ToString());
                     cmd.Parameters.AddWithValue("@Title", inquiry.Title);
@@ -52,7 +52,9 @@ namespace fjernfyn.Repositories
                     cmd.Parameters.AddWithValue("@SoftwareID", inquiry.SoftwareProp.ID);
 
                     cmd.Parameters.AddWithValue("@ErrorCode", inquiry.ErrorCode);
+
                     var imageParam = cmd.Parameters.Add("@Image", SqlDbType.VarBinary, -1);
+                    cmd.Parameters.AddWithValue("@Done", 0);
                     imageParam.Value = (object)inquiry.Image ?? DBNull.Value;
 
                     cmd.ExecuteNonQuery();
